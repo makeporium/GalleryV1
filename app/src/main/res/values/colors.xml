@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bg_soft_pink">#F3D9EA</color>
+    <color name="bg_soft_pink_alt">#EAC7DE</color>
+    <color name="bg_lavender">#D4B9EA</color>
+    <color name="bg_light">#F8F5FA</color>
+    <color name="text_primary_dark">#2A2430</color>
+    <color name="text_muted">#73607B</color>
+    <color name="text_purple">#6A3FA3</color>
+    <color name="btn_purple">#8264D3</color>
+    <color name="btn_magenta">#AA3B85</color>
+    <color name="surface_white">#FFFFFF</color>
+    <color name="surface_pink">#F2DDED</color>
+</resources>

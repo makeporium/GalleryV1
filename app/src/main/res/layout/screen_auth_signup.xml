@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_checker_pink"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="88dp"
+        android:paddingBottom="28dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="SIGN UP"
+            android:textColor="#6F67C9"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etSignupUsername"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/bg_input_round"
+            android:hint="Enter Username"
+            android:paddingHorizontal="12dp"
+            android:textColor="@color/text_primary_dark"
+            android:textColorHint="#8A8792" />
+
+        <EditText
+            android:id="@+id/etSignupEmail"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_input_round"
+            android:hint="Enter Email ID"
+            android:paddingHorizontal="12dp"
+            android:textColor="@color/text_primary_dark"
+            android:textColorHint="#8A8792" />
+
+        <EditText
+            android:id="@+id/etSignupPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_input_round"
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:paddingHorizontal="12dp"
+            android:textColor="@color/text_primary_dark"
+            android:textColorHint="#8A8792" />
+
+        <EditText
+            android:id="@+id/etSignupConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_input_round"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            android:paddingHorizontal="12dp"
+            android:textColor="@color/text_primary_dark"
+            android:textColorHint="#8A8792" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="By continuing, you agree to our Terms of Service and Privacy Policy."
+            android:textColor="#5C4D63"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/btnGoFromSignup"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_button_purple"
+            android:gravity="center"
+            android:text="SIGN UP"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnToLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Already have an account? Login"
+            android:textColor="#5D4A62"
+            android:textSize="14sp" />
+    </LinearLayout>
+</ScrollView>

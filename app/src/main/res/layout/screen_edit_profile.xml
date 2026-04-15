@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_checker_pink"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="44dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#EEE5D0"
+            android:gravity="center"
+            android:text=":)"
+            android:textColor="#4F434C"
+            android:textSize="36sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Edit Picture"
+            android:textColor="#4E3E52"
+            android:textSize="24sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/bg_input_round"
+            android:hint="Name"
+            android:paddingHorizontal="10dp"
+            android:text="Alex Janson"
+            android:textColor="#2D2232"
+            android:textSize="20sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_input_round"
+            android:hint="Username"
+            android:paddingHorizontal="10dp"
+            android:text="staycool"
+            android:textColor="#2D2232"
+            android:textSize="20sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_input_round"
+            android:hint="Bio"
+            android:paddingHorizontal="10dp"
+            android:textColor="#2D2232"
+            android:textSize="20sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_input_round"
+            android:hint="Pronouns"
+            android:paddingHorizontal="10dp"
+            android:textColor="#2D2232"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/btnSaveEditProfile"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/bg_button_purple"
+            android:gravity="center"
+            android:text="EDIT"
+            android:textColor="@android:color/white"
+            android:textSize="28sp" />
+    </LinearLayout>
+</ScrollView>

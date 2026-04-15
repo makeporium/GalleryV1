@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EED4F2"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TODAY'S PROMPT:"
+            android:textColor="#3F3250"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Capture something Peaceful Today!"
+            android:textColor="#4E3270"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="108dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/bg_photo_banner_round"
+            android:gravity="center"
+            android:text="Tap to Upload"
+            android:textColor="#45314F"
+            android:textSize="30sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/bg_input_round"
+            android:hint="Add a caption..."
+            android:paddingHorizontal="16dp"
+            android:textColor="#2B2531"
+            android:textColorHint="#807988"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/btnSubmitPost"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginHorizontal="34dp"
+            android:background="@drawable/bg_button_purple"
+            android:gravity="center"
+            android:text="SUBMIT"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnSubmissionLeaderboard"
+            android:layout_width="190dp"
+            android:layout_height="42dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/bg_button_soft_purple_round"
+            android:gravity="center"
+            android:text="CHECK LEADERBOARD"
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <include layout="@layout/view_bottom_nav_mock" />
+</LinearLayout>

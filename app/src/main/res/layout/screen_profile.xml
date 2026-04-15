@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="#D7C7EA"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp">
+
+            <TextView
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:background="#EFE6CF"
+                android:gravity="center"
+                android:text=":)"
+                android:textColor="#4E4350"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Alex Jamson"
+                    android:textColor="#2B2230"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@staycool · #24 this week"
+                    android:textColor="#5B5064"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="247\nPosts" android:textColor="#2D2232" android:textSize="13sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="1.2k\nFollowers" android:textColor="#2D2232" android:textSize="13sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="384\nFollowing" android:textColor="#2D2232" android:textSize="13sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="8.4k\nLikes" android:textColor="#2D2232" android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="#F4EEF8"
+                android:gravity="center"
+                android:text="Edit Profile"
+                android:textColor="#7A6A86"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:background="#C17BB7"
+                android:gravity="center"
+                android:text="Share Profile"
+                android:textColor="@android:color/white"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp">
+
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Posts" android:textColor="#5B4C63" android:textSize="14sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Liked" android:textColor="#5B4C63" android:textSize="14sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Achievements" android:textColor="#5B4C63" android:textSize="14sp" />
+        </LinearLayout>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:columnCount="3"
+            android:paddingHorizontal="8dp">
+
+            <TextView android:layout_width="0dp" android:layout_height="110dp" android:layout_columnWeight="1" android:layout_margin="3dp" android:background="@drawable/photo_flower" />
+            <TextView android:layout_width="0dp" android:layout_height="110dp" android:layout_columnWeight="1" android:layout_margin="3dp" android:background="@drawable/photo_forest" />
+            <TextView android:layout_width="0dp" android:layout_height="110dp" android:layout_columnWeight="1" android:layout_margin="3dp" android:background="@drawable/photo_city" />
+            <TextView android:layout_width="0dp" android:layout_height="110dp" android:layout_columnWeight="1" android:layout_margin="3dp" android:background="@drawable/photo_mountain" />
+            <TextView android:layout_width="0dp" android:layout_height="110dp" android:layout_columnWeight="1" android:layout_margin="3dp" android:background="@drawable/photo_sunset" />
+            <TextView android:layout_width="0dp" android:layout_height="110dp" android:layout_columnWeight="1" android:layout_margin="3dp" android:background="@drawable/photo_waterfall" />
+        </GridLayout>
+    </LinearLayout>
+
+    <include layout="@layout/view_bottom_nav_mock" />
+</LinearLayout>
