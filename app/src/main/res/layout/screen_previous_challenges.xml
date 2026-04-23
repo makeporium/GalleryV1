@@ -2,8 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E2D3EA"
+    android:background="@color/pastel_surface_white"
     android:orientation="vertical">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="←"
+            android:textColor="@color/pastel_text_primary"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Previous Prompts"
+            android:textColor="@color/pastel_text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+            
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="   "
+            android:textSize="24sp" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,71 +46,131 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="16dp">
 
-            <TextView
+            <!-- Day 1 -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="PREVIOUS CHALLENGES"
-                android:textColor="#6C3D93"
-                android:textSize="42sp" />
+                android:orientation="vertical"
+                android:paddingBottom="24dp">
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Yesterday"
+                    android:textColor="@color/pastel_text_secondary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Neon Lights"
+                    android:textColor="@color/pastel_text_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                    
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/photo_city" />
+            </LinearLayout>
 
-            <TextView
+            <!-- Day 2 -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:gravity="end"
-                android:text="16/03/26"
-                android:textColor="#2E2632"
-                android:textSize="28sp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="88dp"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/photo_city" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:gravity="end"
-                android:text="15/03/26"
-                android:textColor="#2E2632"
-                android:textSize="28sp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="88dp"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/photo_sunset" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:gravity="end"
-                android:text="14/03/26"
-                android:textColor="#2E2632"
-                android:textSize="28sp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="88dp"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/photo_waterfall" />
-
-            <TextView
+                android:orientation="vertical"
+                android:paddingBottom="24dp">
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mar 16"
+                    android:textColor="@color/pastel_text_secondary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Golden Hour"
+                    android:textColor="@color/pastel_text_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                    
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/photo_sunset" />
+            </LinearLayout>
+            
+            <!-- Day 3 -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:gravity="end"
-                android:text="13/03/26"
-                android:textColor="#2E2632"
-                android:textSize="28sp" />
-            <TextView
+                android:orientation="vertical"
+                android:paddingBottom="24dp">
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mar 15"
+                    android:textColor="@color/pastel_text_secondary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Flowing Water"
+                    android:textColor="@color/pastel_text_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                    
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/photo_waterfall" />
+            </LinearLayout>
+
+            <!-- Day 4 -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="88dp"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/photo_mountain" />
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="24dp">
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mar 14"
+                    android:textColor="@color/pastel_text_secondary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="High Altitude"
+                    android:textColor="@color/pastel_text_primary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                    
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/photo_mountain" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

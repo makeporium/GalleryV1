@@ -2,8 +2,74 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D0B0E2"
+    android:background="@color/pastel_surface_white"
     android:orientation="vertical">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Gallery"
+            android:textColor="@color/pastel_text_primary"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tabNew"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="New"
+            android:textColor="@color/pastel_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tabTrending"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Trending"
+            android:textColor="@color/pastel_text_secondary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tabTop"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Top"
+            android:textColor="@color/pastel_text_secondary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:orientation="horizontal">
+        <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@color/pastel_accent_magenta" />
+        <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="#EEEEEE" />
+        <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="#EEEEEE" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -11,80 +77,22 @@
         android:layout_weight="1"
         android:fillViewport="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="18dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Gallery"
-            android:textAlignment="center"
-            android:textColor="#AB3A72"
-            android:textSize="52sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tabNew"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="New"
-                android:textColor="#2A2531"
-                android:textSize="38sp" />
-
-            <TextView
-                android:id="@+id/tabTrending"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Trending"
-                android:textColor="#2A2531"
-                android:textSize="38sp" />
-
-            <TextView
-                android:id="@+id/tabTop"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Top"
-                android:textColor="#2A2531"
-                android:textSize="38sp" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="72dp"
-            android:layout_height="3dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="3dp"
-            android:background="#CC7DB8" />
-
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:columnCount="2">
+            android:layout_marginTop="8dp"
+            android:columnCount="2"
+            android:paddingHorizontal="4dp">
 
-            <TextView android:layout_width="0dp" android:layout_height="170dp" android:layout_columnWeight="1" android:layout_margin="6dp" android:background="@drawable/photo_forest" />
-            <TextView android:layout_width="0dp" android:layout_height="170dp" android:layout_columnWeight="1" android:layout_margin="6dp" android:background="@drawable/photo_sunset" />
-            <TextView android:layout_width="0dp" android:layout_height="170dp" android:layout_columnWeight="1" android:layout_margin="6dp" android:background="@drawable/photo_mountain" />
-            <TextView android:layout_width="0dp" android:layout_height="230dp" android:layout_columnWeight="1" android:layout_margin="6dp" android:background="@drawable/photo_waterfall" />
-            <TextView android:layout_width="0dp" android:layout_height="190dp" android:layout_columnWeight="1" android:layout_margin="6dp" android:background="@drawable/photo_flower" />
-            <TextView android:layout_width="0dp" android:layout_height="145dp" android:layout_columnWeight="1" android:layout_margin="6dp" android:background="@drawable/photo_city" />
-            <TextView android:layout_width="0dp" android:layout_height="200dp" android:layout_columnWeight="1" android:layout_margin="6dp" android:background="@drawable/photo_sunset" />
-            <TextView android:layout_width="0dp" android:layout_height="170dp" android:layout_columnWeight="1" android:layout_margin="6dp" android:background="@drawable/photo_forest" />
+            <TextView android:layout_width="0dp" android:layout_height="170dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_forest" />
+            <TextView android:layout_width="0dp" android:layout_height="170dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_sunset" />
+            <TextView android:layout_width="0dp" android:layout_height="170dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_mountain" />
+            <TextView android:layout_width="0dp" android:layout_height="230dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_waterfall" />
+            <TextView android:layout_width="0dp" android:layout_height="190dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_flower" />
+            <TextView android:layout_width="0dp" android:layout_height="145dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_city" />
+            <TextView android:layout_width="0dp" android:layout_height="200dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_sunset" />
+            <TextView android:layout_width="0dp" android:layout_height="170dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_forest" />
         </GridLayout>
-        </LinearLayout>
     </ScrollView>
 
     <include layout="@layout/view_bottom_nav_mock" />

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6EAF8"
+    android:background="@color/pastel_bg_lavender"
     android:fillViewport="true"
     android:paddingHorizontal="16dp">
 
@@ -17,8 +17,9 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="16dp">
+            app:cardBackgroundColor="@color/pastel_surface_card"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Weekly Rank: #7"
-                    android:textColor="#6A2E73"
+                    android:textColor="@color/pastel_text_highlight"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
@@ -39,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Reset in 2D 14H 21M"
-                    android:textColor="#8B56A5"
+                    android:textColor="@color/pastel_text_secondary"
                     android:textStyle="bold" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -49,15 +50,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:text="Top This Week"
-            android:textColor="#A04B5F"
+            android:textColor="@color/pastel_accent_magenta"
             android:textStyle="bold" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:cardBackgroundColor="#F0D7EA"
-            app:cardCornerRadius="14dp">
+            app:cardBackgroundColor="@color/pastel_surface_card"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,28 +71,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1. @zara - 1,880 pts"
-                    android:textColor="#2F2334" />
+                    android:textColor="@color/pastel_text_primary" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="2. @devansh - 1,720 pts"
-                    android:textColor="#2F2334" />
+                    android:textColor="@color/pastel_text_primary" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="3. @riya - 1,658 pts"
-                    android:textColor="#2F2334" />
+                    android:textColor="@color/pastel_text_primary" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="7. @you - 1,240 pts"
-                    android:textColor="#6A2E73"
+                    android:textColor="@color/pastel_text_highlight"
                     android:textStyle="bold" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

@@ -2,20 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/pastel_bg_lavender"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="58dp"
-        android:background="#E7C6E5" />
+        android:background="@color/pastel_surface_card" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:gravity="center"
         android:text="Messages"
-        android:textColor="#A93A8D"
+        android:textColor="@color/pastel_text_primary"
         android:textSize="56sp"
         android:textStyle="bold" />
 
@@ -24,11 +24,11 @@
         android:layout_height="44dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="6dp"
-        android:background="#F3E8EE"
+        android:background="@color/pastel_surface_card"
         android:hint="Search conversations..."
         android:paddingHorizontal="12dp"
-        android:textColor="#322934"
-        android:textColorHint="#887B8D"
+        android:textColor="@color/pastel_text_primary"
+        android:textColorHint="@color/pastel_text_secondary"
         android:textSize="20sp" />
 
     <ScrollView
@@ -43,23 +43,23 @@
 
             <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
                 <TextView android:layout_width="50dp" android:layout_height="50dp" android:background="@drawable/photo_sunset" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Maria Jones\nCheck the itinerary..." android:textColor="#2D2232" android:textSize="18sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Maria Jones\nCheck the itinerary..." android:textColor="@color/pastel_text_primary" android:textSize="18sp" />
             </LinearLayout>
             <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
                 <TextView android:layout_width="50dp" android:layout_height="50dp" android:background="@drawable/photo_city" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Bob Shelby\nSeen your Sunset..." android:textColor="#2D2232" android:textSize="18sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Bob Shelby\nSeen your Sunset..." android:textColor="@color/pastel_text_primary" android:textSize="18sp" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:background="#EFD7EB" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:background="@color/pastel_surface_card" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
                 <TextView android:layout_width="50dp" android:layout_height="50dp" android:background="@drawable/photo_flower" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="SNAPSHOT\nCongratulations! moved to #24" android:textColor="#2D2232" android:textSize="18sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="SNAPSHOT\nCongratulations! moved to #24" android:textColor="@color/pastel_text_primary" android:textSize="18sp" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:background="#F1DDF0" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:background="@color/pastel_surface_card" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
                 <TextView android:layout_width="50dp" android:layout_height="50dp" android:background="@drawable/photo_forest" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Harvey Leon\nSaw you liked my post" android:textColor="#2D2232" android:textSize="18sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Harvey Leon\nSaw you liked my post" android:textColor="@color/pastel_text_primary" android:textSize="18sp" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:background="#F1DDF0" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:background="@color/pastel_surface_card" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
                 <TextView android:layout_width="50dp" android:layout_height="50dp" android:background="@drawable/photo_mountain" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Alder Finely\nNew series just posted" android:textColor="#2D2232" android:textSize="18sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Alder Finely\nNew series just posted" android:textColor="@color/pastel_text_primary" android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

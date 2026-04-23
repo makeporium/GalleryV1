@@ -2,78 +2,115 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EED4F2"
+    android:background="@color/pastel_surface_white"
     android:orientation="vertical">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+        
+        <TextView
+            android:id="@+id/btnSubmissionBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✕"
+            android:textColor="@color/pastel_text_primary"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="New Post"
+            android:textColor="@color/pastel_text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+            
+        <TextView
+            android:id="@+id/btnSubmitPostTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share"
+            android:textColor="@color/pastel_text_highlight"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="16dp"
             android:text="TODAY'S PROMPT:"
-            android:textColor="#3F3250"
-            android:textSize="15sp"
+            android:textColor="@color/pastel_text_secondary"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Capture something Peaceful Today!"
-            android:textColor="#4E3270"
-            android:textSize="28sp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp"
+            android:text="Neon Lights"
+            android:textColor="@color/pastel_text_primary"
+            android:textSize="24sp"
             android:textStyle="bold" />
 
-        <TextView
+        <!-- Image Placeholder -->
+        <FrameLayout
+            android:id="@+id/btnSelectPhoto"
             android:layout_width="match_parent"
-            android:layout_height="108dp"
-            android:layout_marginTop="28dp"
-            android:background="@drawable/bg_photo_banner_round"
-            android:gravity="center"
-            android:text="Tap to Upload"
-            android:textColor="#45314F"
-            android:textSize="30sp" />
+            android:layout_height="350dp"
+            android:background="#F0F0F0"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
 
+            <ImageView
+                android:id="@+id/ivSelectedPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tvSelectPhotoHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Tap to select photo"
+                android:textColor="@color/pastel_text_secondary"
+                android:textSize="18sp" />
+        </FrameLayout>
+
+        <!-- Caption -->
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:layout_marginTop="26dp"
-            android:background="@drawable/bg_input_round"
-            android:hint="Add a caption..."
-            android:paddingHorizontal="16dp"
-            android:textColor="#2B2531"
-            android:textColorHint="#807988"
-            android:textSize="26sp" />
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="Write a caption..."
+            android:minLines="3"
+            android:padding="16dp"
+            android:gravity="top|start"
+            android:textColor="@color/pastel_text_primary"
+            android:textColorHint="@color/pastel_text_secondary"
+            android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/btnSubmitPost"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginHorizontal="34dp"
-            android:background="@drawable/bg_button_purple"
-            android:gravity="center"
-            android:text="SUBMIT"
-            android:textColor="@android:color/white"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:layout_height="1dp"
+            android:background="#EEEEEE" />
 
-        <TextView
-            android:id="@+id/btnSubmissionLeaderboard"
-            android:layout_width="190dp"
-            android:layout_height="42dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="44dp"
-            android:background="@drawable/bg_button_soft_purple_round"
-            android:gravity="center"
-            android:text="CHECK LEADERBOARD"
-            android:textColor="@android:color/white"
-            android:textSize="13sp" />
     </LinearLayout>
 
     <include layout="@layout/view_bottom_nav_mock" />

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/pastel_bg_lavender"
     android:fillViewport="true"
     android:paddingHorizontal="16dp">
 
@@ -17,8 +17,9 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#D7C7EE"
-            app:cardCornerRadius="16dp">
+            app:cardBackgroundColor="@color/pastel_surface_card"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@you"
-                    android:textColor="#2E193D"
+                    android:textColor="@color/pastel_text_primary"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -39,21 +40,21 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="All-Time Coins: 3,920"
-                    android:textColor="#2E193D" />
+                    android:textColor="@color/pastel_text_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="Current Streak: 5 Days"
-                    android:textColor="#2E193D" />
+                    android:textColor="@color/pastel_text_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="Badges: Weekend Warrior, Consistent Creator"
-                    android:textColor="#6F2C7A" />
+                    android:textColor="@color/pastel_text_highlight" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -62,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:text="Past Uploads"
-            android:textColor="#2E193D"
+            android:textColor="@color/pastel_text_primary"
             android:textStyle="bold" />
 
         <GridLayout
@@ -76,38 +77,39 @@
                 android:layout_height="90dp"
                 android:layout_columnWeight="1"
                 android:layout_margin="3dp"
-                android:background="#D7E5F5"
+                android:background="@drawable/bg_photo_tile_round"
                 android:gravity="center"
                 android:text="Shot 1"
-                android:textColor="#2E193D" />
+                android:textColor="@color/pastel_text_primary" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="90dp"
                 android:layout_columnWeight="1"
                 android:layout_margin="3dp"
-                android:background="#DCE8D0"
+                android:background="@drawable/bg_photo_tile_round"
                 android:gravity="center"
                 android:text="Shot 2"
-                android:textColor="#2E193D" />
+                android:textColor="@color/pastel_text_primary" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="90dp"
                 android:layout_columnWeight="1"
                 android:layout_margin="3dp"
-                android:background="#F5D7D2"
+                android:background="@drawable/bg_photo_tile_round"
                 android:gravity="center"
                 android:text="Shot 3"
-                android:textColor="#2E193D" />
+                android:textColor="@color/pastel_text_primary" />
         </GridLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="14dp">
+            app:cardBackgroundColor="@color/pastel_surface_card"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Settings"
-                    android:textColor="#2E193D"
+                    android:textColor="@color/pastel_text_primary"
                     android:textStyle="bold" />
 
                 <TextView
@@ -128,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Account Status: Good Standing"
-                    android:textColor="#3B8A54" />
+                    android:textColor="@color/pastel_text_primary" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

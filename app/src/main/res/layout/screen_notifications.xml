@@ -2,18 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@color/pastel_surface_white"
     android:orientation="vertical">
 
-    <TextView
+    <!-- Top Bar -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="54dp"
-        android:background="#E8C4E3"
+        android:layout_height="56dp"
         android:gravity="center_vertical"
-        android:paddingHorizontal="18dp"
-        android:text="Notifications"
-        android:textColor="#2D2232"
-        android:textSize="34sp" />
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Notifications"
+            android:textColor="@color/pastel_text_primary"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,34 +31,60 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <TextView android:layout_width="match_parent" android:layout_height="58dp" android:gravity="center" android:text="Today" android:textColor="#2D2232" android:textSize="32sp" />
-            <LinearLayout android:layout_width="match_parent" android:layout_height="58dp" android:background="#F6E6F1" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Meera liked your post" android:textColor="#3C2F43" android:textSize="18sp" />
-                <TextView android:layout_width="42dp" android:layout_height="34dp" android:background="@drawable/photo_flower" />
+            <TextView 
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content" 
+                android:layout_marginBottom="16dp"
+                android:text="Today" 
+                android:textColor="@color/pastel_text_primary" 
+                android:textSize="18sp" 
+                android:textStyle="bold" />
+                
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:paddingBottom="16dp">
+                <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_button_soft_purple_round" android:gravity="center" android:text="M" android:textColor="@android:color/white" android:textSize="20sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Meera liked your post" android:textColor="@color/pastel_text_primary" android:textSize="14sp" />
+                <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/photo_flower" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="58dp" android:background="#F6E6F1" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Joe liked your post" android:textColor="#3C2F43" android:textSize="18sp" />
-                <TextView android:layout_width="42dp" android:layout_height="34dp" android:background="@drawable/photo_city" />
+            
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:paddingBottom="16dp">
+                <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_button_soft_purple_round" android:gravity="center" android:text="J" android:textColor="@android:color/white" android:textSize="20sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Joe liked your post" android:textColor="@color/pastel_text_primary" android:textSize="14sp" />
+                <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/photo_city" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="58dp" android:background="#F6E6F1" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Unread Messages" android:textColor="#3C2F43" android:textSize="18sp" />
-                <TextView android:layout_width="42dp" android:layout_height="34dp" android:background="@drawable/photo_sunset" />
+            
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:paddingBottom="16dp">
+                <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_button_magenta_round" android:gravity="center" android:text="✉️" android:textSize="20sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="You have unread messages" android:textColor="@color/pastel_text_primary" android:textSize="14sp" />
             </LinearLayout>
 
-            <TextView android:layout_width="match_parent" android:layout_height="58dp" android:gravity="center" android:text="Yesterday" android:textColor="#2D2232" android:textSize="32sp" />
-            <LinearLayout android:layout_width="match_parent" android:layout_height="58dp" android:background="#F6E6F1" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="You moved to #24 in the world" android:textColor="#3C2F43" android:textSize="18sp" />
-                <TextView android:layout_width="42dp" android:layout_height="34dp" android:background="@drawable/photo_mountain" />
+            <TextView 
+                android:layout_width="match_parent" 
+                android:layout_height="wrap_content" 
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:text="Yesterday" 
+                android:textColor="@color/pastel_text_primary" 
+                android:textSize="18sp" 
+                android:textStyle="bold" />
+                
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:paddingBottom="16dp">
+                <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_button_magenta_round" android:gravity="center" android:text="🏅" android:textSize="20sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="You moved to #24 in the world" android:textColor="@color/pastel_text_primary" android:textSize="14sp" />
+                <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/photo_mountain" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="58dp" android:background="#F6E6F1" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Dev started following you" android:textColor="#3C2F43" android:textSize="18sp" />
-                <TextView android:layout_width="42dp" android:layout_height="34dp" android:background="@drawable/photo_forest" />
+            
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:paddingBottom="16dp">
+                <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_button_soft_purple_round" android:gravity="center" android:text="D" android:textColor="@android:color/white" android:textSize="20sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Dev started following you" android:textColor="@color/pastel_text_primary" android:textSize="14sp" />
             </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="58dp" android:background="#F6E6F1" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Maxine liked your post" android:textColor="#3C2F43" android:textSize="18sp" />
-                <TextView android:layout_width="42dp" android:layout_height="34dp" android:background="@drawable/photo_waterfall" />
+            
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:paddingBottom="16dp">
+                <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_button_soft_purple_round" android:gravity="center" android:text="M" android:textColor="@android:color/white" android:textSize="20sp" />
+                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Maxine liked your post" android:textColor="@color/pastel_text_primary" android:textSize="14sp" />
+                <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/photo_waterfall" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

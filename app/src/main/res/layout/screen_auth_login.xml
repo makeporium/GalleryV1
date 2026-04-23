@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_checker_pink"
+    android:background="@color/pastel_surface_white"
     android:fillViewport="true">
 
     <LinearLayout
@@ -16,7 +16,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:background="#C2ABE8"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp">
@@ -26,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="&lt;"
-                android:textColor="#3C2F4B"
+                android:textColor="@color/pastel_text_primary"
                 android:textSize="22sp" />
 
             <TextView
@@ -35,7 +34,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Log in"
-                android:textColor="#392D46"
+                android:textColor="@color/pastel_text_primary"
                 android:textSize="26sp" />
         </LinearLayout>
 
@@ -47,8 +46,8 @@
             android:background="@drawable/bg_input_round"
             android:hint="Email ID"
             android:paddingHorizontal="12dp"
-            android:textColor="@color/text_primary_dark"
-            android:textColorHint="#8A8792" />
+            android:textColor="@color/pastel_text_primary"
+            android:textColorHint="@color/pastel_text_secondary" />
 
         <EditText
             android:id="@+id/etLoginPassword"
@@ -59,8 +58,8 @@
             android:hint="Password"
             android:inputType="textPassword"
             android:paddingHorizontal="12dp"
-            android:textColor="@color/text_primary_dark"
-            android:textColorHint="#8A8792" />
+            android:textColor="@color/pastel_text_primary"
+            android:textColorHint="@color/pastel_text_secondary" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -68,7 +67,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:text="Forgot password?"
-            android:textColor="#5F2B8A"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="21sp"
             android:textStyle="bold" />
 
@@ -77,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
             android:text="By continuing, you agree to our Terms of Service and Privacy Policy."
-            android:textColor="#5C4D63"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="12sp" />
 
         <TextView
@@ -98,7 +97,7 @@
             android:layout_marginTop="14dp"
             android:gravity="center"
             android:text="Don't have an account? SIGN UP today!"
-            android:textColor="#5D4A62"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="14sp" />
     </LinearLayout>
 </ScrollView>

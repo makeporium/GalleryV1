@@ -1,49 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/bg_soft_pink" />
-    <item
-        android:left="0dp"
-        android:top="0dp"
-        android:right="220dp"
-        android:bottom="640dp">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/bg_soft_pink_alt" />
-        </shape>
-    </item>
-    <item
-        android:left="96dp"
-        android:top="48dp"
-        android:right="112dp"
-        android:bottom="560dp">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/bg_soft_pink" />
-        </shape>
-    </item>
-    <item
-        android:left="192dp"
-        android:top="0dp"
-        android:right="16dp"
-        android:bottom="608dp">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/bg_soft_pink_alt" />
-        </shape>
-    </item>
-    <item
-        android:left="0dp"
-        android:top="120dp"
-        android:right="240dp"
-        android:bottom="448dp">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/bg_soft_pink" />
-        </shape>
-    </item>
-    <item
-        android:left="128dp"
-        android:top="208dp"
-        android:right="80dp"
-        android:bottom="352dp">
-        <shape android:shape="rectangle">
-            <solid android:color="@color/bg_soft_pink_alt" />
-        </shape>
-    </item>
-</layer-list>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/pastel_surface_white" />
+</shape>

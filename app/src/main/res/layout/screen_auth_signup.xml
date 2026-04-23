@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_checker_pink"
+    android:background="@color/pastel_surface_white"
     android:fillViewport="true">
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="SIGN UP"
-            android:textColor="#6F67C9"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -30,8 +30,8 @@
             android:background="@drawable/bg_input_round"
             android:hint="Enter Username"
             android:paddingHorizontal="12dp"
-            android:textColor="@color/text_primary_dark"
-            android:textColorHint="#8A8792" />
+            android:textColor="@color/pastel_text_primary"
+            android:textColorHint="@color/pastel_text_secondary" />
 
         <EditText
             android:id="@+id/etSignupEmail"
@@ -41,8 +41,8 @@
             android:background="@drawable/bg_input_round"
             android:hint="Enter Email ID"
             android:paddingHorizontal="12dp"
-            android:textColor="@color/text_primary_dark"
-            android:textColorHint="#8A8792" />
+            android:textColor="@color/pastel_text_primary"
+            android:textColorHint="@color/pastel_text_secondary" />
 
         <EditText
             android:id="@+id/etSignupPassword"
@@ -53,8 +53,8 @@
             android:hint="Enter Password"
             android:inputType="textPassword"
             android:paddingHorizontal="12dp"
-            android:textColor="@color/text_primary_dark"
-            android:textColorHint="#8A8792" />
+            android:textColor="@color/pastel_text_primary"
+            android:textColorHint="@color/pastel_text_secondary" />
 
         <EditText
             android:id="@+id/etSignupConfirmPassword"
@@ -65,15 +65,15 @@
             android:hint="Confirm Password"
             android:inputType="textPassword"
             android:paddingHorizontal="12dp"
-            android:textColor="@color/text_primary_dark"
-            android:textColorHint="#8A8792" />
+            android:textColor="@color/pastel_text_primary"
+            android:textColorHint="@color/pastel_text_secondary" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="By continuing, you agree to our Terms of Service and Privacy Policy."
-            android:textColor="#5C4D63"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="12sp" />
 
         <TextView
@@ -95,7 +95,7 @@
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="Already have an account? Login"
-            android:textColor="#5D4A62"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="14sp" />
     </LinearLayout>
 </ScrollView>

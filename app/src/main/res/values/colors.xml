@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base Colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bg_soft_pink">#F3D9EA</color>
-    <color name="bg_soft_pink_alt">#EAC7DE</color>
-    <color name="bg_lavender">#D4B9EA</color>
-    <color name="bg_light">#F8F5FA</color>
-    <color name="text_primary_dark">#2A2430</color>
-    <color name="text_muted">#73607B</color>
-    <color name="text_purple">#6A3FA3</color>
-    <color name="btn_purple">#8264D3</color>
-    <color name="btn_magenta">#AA3B85</color>
-    <color name="surface_white">#FFFFFF</color>
-    <color name="surface_pink">#F2DDED</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Backgrounds & Surfaces (Cleaner Instagram vibe) -->
+    <color name="pastel_bg_lavender">#FAFAFA</color> <!-- Off-white clean background -->
+    <color name="pastel_bg_pink">#FAFAFA</color>
+    <color name="pastel_bg_blue">#FAFAFA</color>
+    <color name="pastel_surface_white">#FFFFFF</color>
+    <color name="pastel_surface_card">#FFFFFF</color> <!-- Crisp white cards -->
+    
+    <!-- Accent Colors (Retaining pastel whimsy for buttons/badges) -->
+    <color name="pastel_accent_purple">#D1C4E9</color>
+    <color name="pastel_accent_purple_dark">#7E57C2</color>
+    <color name="pastel_accent_pink">#F48FB1</color>
+    <color name="pastel_accent_magenta">#E57373</color>
+    <color name="pastel_accent_teal">#80CBC4</color>
+    <color name="pastel_accent_mint">#A5D6A7</color>
+    
+    <!-- UI Elements -->
+    <color name="pastel_tab_indicator">#7E57C2</color>
+    <color name="pastel_tab_bg">#FFFFFF</color>
+    
+    <!-- Text Colors (High contrast, clean typography) -->
+    <color name="pastel_text_primary">#1C1C1C</color> <!-- Almost black for readability -->
+    <color name="pastel_text_secondary">#757575</color> <!-- Neutral grey for meta info -->
+    <color name="pastel_text_highlight">#7E57C2</color> <!-- Darker purple for interactive text -->
+
+    <!-- Compatibility -->
+    <color name="text_primary_dark">#1C1C1C</color>
 </resources>

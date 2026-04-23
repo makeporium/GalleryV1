@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7EAF8"
+    android:background="@color/pastel_bg_lavender"
     android:fillViewport="true"
     android:paddingHorizontal="16dp">
 
@@ -17,8 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="16dp">
+            app:cardBackgroundColor="@color/pastel_surface_card"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -30,24 +31,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@aanya - 2m ago"
-                    android:textColor="#4A2D6B"
+                    android:textColor="@color/pastel_text_highlight"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
                     android:layout_marginTop="10dp"
-                    android:background="#D8C4E8"
+                    android:background="@drawable/bg_photo_tile_round"
                     android:gravity="center"
                     android:text="Photo Placeholder"
-                    android:textColor="#66457D" />
+                    android:textColor="@color/pastel_text_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="City lights never sleep."
-                    android:textColor="#2F2334" />
+                    android:textColor="@color/pastel_text_primary" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -58,21 +59,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Like 214"
-                        android:textColor="#5A4766" />
+                        android:textColor="@color/pastel_text_secondary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:text="Comment 38"
-                        android:textColor="#5A4766" />
+                        android:textColor="@color/pastel_text_secondary" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:text="Share"
-                        android:textColor="#5A4766" />
+                        android:textColor="@color/pastel_text_secondary" />
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -81,8 +82,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="16dp">
+            app:cardBackgroundColor="@color/pastel_surface_card"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="2dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,24 +96,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@rohan - 5m ago"
-                    android:textColor="#4A2D6B"
+                    android:textColor="@color/pastel_text_highlight"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
                     android:layout_marginTop="10dp"
-                    android:background="#D8C4E8"
+                    android:background="@drawable/bg_photo_tile_round"
                     android:gravity="center"
                     android:text="Photo Placeholder"
-                    android:textColor="#66457D" />
+                    android:textColor="@color/pastel_text_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="Shot from the metro bridge."
-                    android:textColor="#2F2334" />
+                    android:textColor="@color/pastel_text_primary" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

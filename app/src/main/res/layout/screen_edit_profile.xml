@@ -17,10 +17,10 @@
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_gravity="center_horizontal"
-            android:background="#EEE5D0"
+            android:background="@color/pastel_bg_lavender"
             android:gravity="center"
             android:text=":)"
-            android:textColor="#4F434C"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="36sp" />
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="Edit Picture"
-            android:textColor="#4E3E52"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="24sp" />
 
         <EditText
@@ -40,7 +40,7 @@
             android:hint="Name"
             android:paddingHorizontal="10dp"
             android:text="Alex Janson"
-            android:textColor="#2D2232"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="20sp" />
 
         <EditText
@@ -51,7 +51,7 @@
             android:hint="Username"
             android:paddingHorizontal="10dp"
             android:text="staycool"
-            android:textColor="#2D2232"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="20sp" />
 
         <EditText
@@ -61,7 +61,7 @@
             android:background="@drawable/bg_input_round"
             android:hint="Bio"
             android:paddingHorizontal="10dp"
-            android:textColor="#2D2232"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="20sp" />
 
         <EditText
@@ -71,7 +71,7 @@
             android:background="@drawable/bg_input_round"
             android:hint="Pronouns"
             android:paddingHorizontal="10dp"
-            android:textColor="#2D2232"
+            android:textColor="@color/pastel_text_primary"
             android:textSize="20sp" />
 
         <TextView
