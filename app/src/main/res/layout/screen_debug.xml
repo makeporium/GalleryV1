@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pastel_surface_white"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Debug Testing Menu"
+        android:textColor="@color/pastel_text_primary"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Manually trigger flows:"
+        android:textColor="@color/pastel_text_secondary"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnDebugFirstTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Trigger: First Time Login (Tutorial)" />
+
+    <Button
+        android:id="@+id/btnDebugMonday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Trigger: Monday (Weekly Wrap-up)" />
+
+    <Button
+        android:id="@+id/btnDebugStrike1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Trigger: Strike 1 Notification" />
+
+    <Button
+        android:id="@+id/btnDebugStrike2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Trigger: Strike 2 Warning" />
+
+    <Button
+        android:id="@+id/btnDebugStrike3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Trigger: Strike 3 (Ban)" />
+        
+    <Button
+        android:id="@+id/btnDebugClearStrikes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Clear Strikes / Reset" />
+
+    <TextView
+        android:id="@+id/btnDebugBack"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_button_purple"
+        android:gravity="center"
+        android:text="BACK TO APP"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+</LinearLayout>

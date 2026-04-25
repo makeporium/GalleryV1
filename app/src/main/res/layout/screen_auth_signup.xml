@@ -89,6 +89,18 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/btnGoogleSignup"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_button_soft_purple_round"
+            android:gravity="center"
+            android:text="Sign up with Google"
+            android:textColor="@color/pastel_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/btnToLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

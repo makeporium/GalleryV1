@@ -61,7 +61,7 @@
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="2dp"
@@ -71,29 +71,14 @@
         <View android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@color/pastel_accent_magenta" />
     </LinearLayout>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGallery"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fillViewport="true">
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:columnCount="2"
-            android:paddingHorizontal="4dp">
-
-            <TextView android:layout_width="0dp" android:layout_height="170dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_city" />
-            <TextView android:layout_width="0dp" android:layout_height="170dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_flower" />
-            <TextView android:layout_width="0dp" android:layout_height="145dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_mountain" />
-            <TextView android:layout_width="0dp" android:layout_height="175dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_sunset" />
-            <TextView android:layout_width="0dp" android:layout_height="250dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_waterfall" />
-            <TextView android:layout_width="0dp" android:layout_height="250dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_forest" />
-            <TextView android:layout_width="0dp" android:layout_height="190dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_city" />
-            <TextView android:layout_width="0dp" android:layout_height="200dp" android:layout_columnWeight="1" android:layout_margin="4dp" android:background="@drawable/photo_flower" />
-        </GridLayout>
-    </ScrollView>
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="4dp" />
 
     <include layout="@layout/view_bottom_nav_mock" />
+
 </LinearLayout>

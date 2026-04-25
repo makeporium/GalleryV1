@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/pastel_surface_white"
@@ -13,7 +12,7 @@
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingHorizontal="16dp">
-        
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -22,7 +21,15 @@
             android:textColor="@color/pastel_text_primary"
             android:textSize="24sp"
             android:textStyle="bold" />
-            
+
+        <TextView
+            android:id="@+id/btnTopNotifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:text="🔔"
+            android:textSize="20sp" />
+
         <TextView
             android:id="@+id/btnHomeDebug"
             android:layout_width="wrap_content"
@@ -31,7 +38,7 @@
             android:textSize="20sp" />
     </LinearLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -48,12 +55,18 @@
                 android:layout_height="180dp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/photo_mountain">
+                android:background="@color/pastel_surface_card">
+
+                <ImageView
+                    android:id="@+id/ivPromptBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#4D000000" /> <!-- Dark Overlay -->
+                    android:background="#4D000000" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -65,197 +78,74 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TODAY'S CHALLENGE"
-                        android:textColor="#E0E0E0"
+                        android:text="DAILY CHALLENGE"
+                        android:textColor="#B3FFFFFF"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        android:letterSpacing="0.1" />
+                        android:letterSpacing="0.15" />
 
                     <TextView
+                        android:id="@+id/tvPromptTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Neon Lights"
+                        android:layout_marginTop="8dp"
+                        android:text="Loading..."
                         android:textColor="@android:color/white"
-                        android:textSize="32sp"
-                        android:textStyle="bold" />
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:shadowColor="#40000000"
+                        android:shadowDx="2"
+                        android:shadowDy="2"
+                        android:shadowRadius="4" />
+                        
+                    <TextView
+                        android:id="@+id/tvPromptDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text=""
+                        android:gravity="center"
+                        android:textColor="#CCFFFFFF"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="2dp" />
 
                     <TextView
                         android:id="@+id/btnHomeSubmitEntry"
                         android:layout_width="wrap_content"
-                        android:layout_height="36dp"
+                        android:layout_height="40dp"
                         android:layout_marginTop="16dp"
                         android:background="@drawable/bg_button_magenta_round"
                         android:gravity="center"
-                        android:paddingHorizontal="24dp"
-                        android:text="Participate"
+                        android:paddingHorizontal="32dp"
+                        android:text="PARTICIPATE"
                         android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05" />
                 </LinearLayout>
             </FrameLayout>
 
             <!-- Feed Section -->
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:orientation="vertical">
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:paddingHorizontal="16dp"
+                android:text="Recent Posts"
+                android:textColor="@color/pastel_text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <!-- Post 1 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingBottom="24dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFeed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="80dp"
+                android:nestedScrollingEnabled="false" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="16dp"
-                        android:paddingBottom="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="aanya"
-                            android:textColor="@color/pastel_text_primary"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="2m ago"
-                            android:textColor="@color/pastel_text_secondary"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="350dp"
-                        android:background="@drawable/photo_city" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="16dp"
-                        android:paddingTop="12dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="♡ 214"
-                            android:textColor="@color/pastel_text_primary"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="💬 38"
-                            android:textColor="@color/pastel_text_primary"
-                            android:textSize="18sp" />
-
-                        <Space
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="➦"
-                            android:textColor="@color/pastel_text_primary"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="16dp"
-                        android:paddingTop="8dp"
-                        android:text="City lights never sleep."
-                        android:textColor="@color/pastel_text_primary" />
-                </LinearLayout>
-
-                <!-- Post 2 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingBottom="24dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="16dp"
-                        android:paddingBottom="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="rohan"
-                            android:textColor="@color/pastel_text_primary"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:text="5m ago"
-                            android:textColor="@color/pastel_text_secondary"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="350dp"
-                        android:background="@drawable/photo_sunset" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingHorizontal="16dp"
-                        android:paddingTop="12dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="♡ 89"
-                            android:textColor="@color/pastel_text_primary"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="💬 12"
-                            android:textColor="@color/pastel_text_primary"
-                            android:textSize="18sp" />
-
-                        <Space
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="➦"
-                            android:textColor="@color/pastel_text_primary"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <include layout="@layout/view_bottom_nav_mock" />
 

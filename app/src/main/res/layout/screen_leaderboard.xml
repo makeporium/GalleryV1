@@ -14,6 +14,7 @@
         android:paddingHorizontal="16dp">
 
         <TextView
+            android:id="@+id/tvLeaderboardTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -21,9 +22,18 @@
             android:textColor="@color/pastel_text_primary"
             android:textSize="24sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btnLeaderboardHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:textColor="@color/pastel_text_secondary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Sunday Countdown Banner -->
+    <!-- Weekly Reset Banner -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,98 +45,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="WEEKLY RESET IN"
+            android:text="WEEKLY LEADERBOARD"
             android:textColor="#E65100"
             android:textSize="12sp"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tvLeaderboardWeek"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="1d 14h 22m"
+            android:text="Loading..."
             android:textColor="#E65100"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLeaderboard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Top 3 Podium (Mock) -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="bottom|center_horizontal"
-                android:orientation="horizontal"
-                android:paddingTop="24dp"
-                android:paddingBottom="24dp">
-
-                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center" android:layout_marginEnd="16dp">
-                    <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/photo_mountain" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alex" android:textColor="@color/pastel_text_primary" android:textStyle="bold" android:layout_marginTop="4dp" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2" android:textColor="@color/pastel_text_secondary" android:textSize="24sp" android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center" android:layout_marginEnd="16dp" android:layout_marginBottom="24dp">
-                    <TextView android:layout_width="64dp" android:layout_height="64dp" android:background="@drawable/photo_city" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="staycool" android:textColor="@color/pastel_accent_magenta" android:textStyle="bold" android:layout_marginTop="4dp" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1" android:textColor="@color/pastel_accent_magenta" android:textSize="32sp" android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center">
-                    <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/photo_sunset" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="rohan" android:textColor="@color/pastel_text_primary" android:textStyle="bold" android:layout_marginTop="4dp" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3" android:textColor="@color/pastel_text_secondary" android:textSize="24sp" android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- List -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout android:layout_width="match_parent" android:layout_height="64dp" android:gravity="center_vertical" android:paddingHorizontal="16dp">
-                    <TextView android:layout_width="32dp" android:layout_height="wrap_content" android:text="4" android:textSize="18sp" android:textColor="@color/pastel_text_primary" android:textStyle="bold" />
-                    <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/photo_flower" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="photofreak" android:textSize="16sp" android:textColor="@color/pastel_text_primary" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1,240 pts" android:textColor="@color/pastel_text_secondary" />
-                </LinearLayout>
-                
-                <LinearLayout android:layout_width="match_parent" android:layout_height="64dp" android:gravity="center_vertical" android:paddingHorizontal="16dp">
-                    <TextView android:layout_width="32dp" android:layout_height="wrap_content" android:text="5" android:textSize="18sp" android:textColor="@color/pastel_text_primary" android:textStyle="bold" />
-                    <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/photo_forest" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="naturelover" android:textSize="16sp" android:textColor="@color/pastel_text_primary" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="1,120 pts" android:textColor="@color/pastel_text_secondary" />
-                </LinearLayout>
-                
-                <LinearLayout android:layout_width="match_parent" android:layout_height="64dp" android:gravity="center_vertical" android:paddingHorizontal="16dp">
-                    <TextView android:layout_width="32dp" android:layout_height="wrap_content" android:text="6" android:textSize="18sp" android:textColor="@color/pastel_text_primary" android:textStyle="bold" />
-                    <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/photo_waterfall" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="waterdrops" android:textSize="16sp" android:textColor="@color/pastel_text_primary" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="980 pts" android:textColor="@color/pastel_text_secondary" />
-                </LinearLayout>
-                
-                <!-- My Rank -->
-                <LinearLayout android:layout_width="match_parent" android:layout_height="72dp" android:layout_marginTop="16dp" android:background="@color/pastel_surface_card" android:gravity="center_vertical" android:paddingHorizontal="16dp" android:elevation="4dp">
-                    <TextView android:layout_width="32dp" android:layout_height="wrap_content" android:text="24" android:textSize="18sp" android:textColor="@color/pastel_text_primary" android:textStyle="bold" />
-                    <TextView android:layout_width="48dp" android:layout_height="48dp" android:background="@drawable/bg_button_soft_purple_round" android:gravity="center" android:text="ME" android:textColor="@android:color/white" android:textStyle="bold" />
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="My Rank" android:textSize="16sp" android:textColor="@color/pastel_text_primary" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="450 pts" android:textColor="@color/pastel_text_primary" android:textStyle="bold" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        android:layout_weight="1" />
 
     <include layout="@layout/view_bottom_nav_mock" />
+
 </LinearLayout>

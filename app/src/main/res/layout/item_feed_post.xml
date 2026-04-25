@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="20dp">
+
+    <!-- User info row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp">
+
+        <ImageView
+            android:id="@+id/ivFeedAvatar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_button_soft_purple_round"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tvFeedUsername"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:textColor="@color/pastel_text_primary"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvFeedTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/pastel_text_secondary"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- Post image -->
+    <ImageView
+        android:id="@+id/ivFeedPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@color/pastel_surface_card"
+        android:scaleType="centerCrop" />
+
+    <!-- Stats row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/tvFeedLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="♡ 0"
+            android:textColor="@color/pastel_text_primary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvFeedComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="💬 0"
+            android:textColor="@color/pastel_text_primary"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Caption -->
+    <TextView
+        android:id="@+id/tvFeedCaption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="6dp"
+        android:textColor="@color/pastel_text_primary"
+        android:textSize="14sp" />
+
+</LinearLayout>

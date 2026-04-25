@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pastel_surface_white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/bg_button_magenta_round"
+        android:gravity="center"
+        android:text="⚠️"
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/tvModerationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="STRIKE 1 WARNING"
+        android:textColor="@color/pastel_accent_magenta"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvModerationDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Your photo yesterday was excluded due to originality filters. It is hidden from the main feed."
+        android:textColor="@color/pastel_text_primary"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvModerationRedemption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="#FFF3E0"
+        android:padding="16dp"
+        android:text="Redemption: Achieve a 7-Day Streak of verified original photos to clear this strike."
+        android:textColor="#E65100"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/btnAppealStrike"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_button_soft_purple_round"
+        android:gravity="center"
+        android:text="APPEAL DECISION"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/btnAcceptStrike"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_button_purple"
+        android:gravity="center"
+        android:text="I UNDERSTAND"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -13,15 +13,13 @@
         android:paddingTop="44dp"
         android:paddingBottom="24dp">
 
-        <TextView
+        <ImageView
+            android:id="@+id/ivEditAvatar"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_gravity="center_horizontal"
             android:background="@color/pastel_bg_lavender"
-            android:gravity="center"
-            android:text=":)"
-            android:textColor="@color/pastel_text_primary"
-            android:textSize="36sp" />
+            android:scaleType="centerCrop" />
 
         <TextView
             android:layout_width="match_parent"
@@ -33,38 +31,42 @@
             android:textSize="24sp" />
 
         <EditText
+            android:id="@+id/etEditName"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="26dp"
             android:background="@drawable/bg_input_round"
             android:hint="Name"
             android:paddingHorizontal="10dp"
-            android:text="Alex Janson"
             android:textColor="@color/pastel_text_primary"
             android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/etEditUsername"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="14dp"
             android:background="@drawable/bg_input_round"
-            android:hint="Username"
+            android:hint="Username / Email"
             android:paddingHorizontal="10dp"
-            android:text="staycool"
             android:textColor="@color/pastel_text_primary"
             android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/etEditBio"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:layout_marginTop="14dp"
             android:background="@drawable/bg_input_round"
             android:hint="Bio"
             android:paddingHorizontal="10dp"
+            android:paddingVertical="10dp"
             android:textColor="@color/pastel_text_primary"
             android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/etEditPronouns"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="14dp"
@@ -81,7 +83,7 @@
             android:layout_marginTop="26dp"
             android:background="@drawable/bg_button_purple"
             android:gravity="center"
-            android:text="EDIT"
+            android:text="SAVE"
             android:textColor="@android:color/white"
             android:textSize="28sp" />
     </LinearLayout>

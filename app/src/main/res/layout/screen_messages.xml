@@ -5,64 +5,65 @@
     android:background="@color/pastel_bg_lavender"
     android:orientation="vertical">
 
-    <TextView
+    <!-- Top Bar with Activity/Messages Toggle -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:background="@color/pastel_surface_card" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="68dp"
+        android:layout_height="56dp"
         android:gravity="center"
-        android:text="Messages"
-        android:textColor="@color/pastel_text_primary"
-        android:textSize="56sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:background="@color/pastel_surface_card">
+
+        <LinearLayout
+            android:layout_width="240dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_input_round"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/toggleActivity"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Activity"
+                android:textColor="@color/pastel_text_secondary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/toggleMessages"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_button_purple"
+                android:gravity="center"
+                android:text="Messages"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
         android:background="@color/pastel_surface_card"
         android:hint="Search conversations..."
         android:paddingHorizontal="12dp"
         android:textColor="@color/pastel_text_primary"
         android:textColorHint="@color/pastel_text_secondary"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvConversations"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
-                <TextView android:layout_width="50dp" android:layout_height="50dp" android:background="@drawable/photo_sunset" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Maria Jones\nCheck the itinerary..." android:textColor="@color/pastel_text_primary" android:textSize="18sp" />
-            </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
-                <TextView android:layout_width="50dp" android:layout_height="50dp" android:background="@drawable/photo_city" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Bob Shelby\nSeen your Sunset..." android:textColor="@color/pastel_text_primary" android:textSize="18sp" />
-            </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:background="@color/pastel_surface_card" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
-                <TextView android:layout_width="50dp" android:layout_height="50dp" android:background="@drawable/photo_flower" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="SNAPSHOT\nCongratulations! moved to #24" android:textColor="@color/pastel_text_primary" android:textSize="18sp" />
-            </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:background="@color/pastel_surface_card" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
-                <TextView android:layout_width="50dp" android:layout_height="50dp" android:background="@drawable/photo_forest" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Harvey Leon\nSaw you liked my post" android:textColor="@color/pastel_text_primary" android:textSize="18sp" />
-            </LinearLayout>
-            <LinearLayout android:layout_width="match_parent" android:layout_height="86dp" android:background="@color/pastel_surface_card" android:gravity="center_vertical" android:orientation="horizontal" android:paddingHorizontal="16dp">
-                <TextView android:layout_width="50dp" android:layout_height="50dp" android:background="@drawable/photo_mountain" />
-                <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:layout_weight="1" android:text="Alder Finely\nNew series just posted" android:textColor="@color/pastel_text_primary" android:textSize="18sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        android:layout_weight="1" />
 
     <include layout="@layout/view_bottom_nav_mock" />
+
 </LinearLayout>

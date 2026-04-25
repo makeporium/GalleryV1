@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "750649718921",
+    "project_id": "chesh-a1ff5",
+    "storage_bucket": "chesh-a1ff5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750649718921:android:77fe67af57f9ddebeb2e58",
+        "android_client_info": {
+          "package_name": "com.example.chesh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750649718921-m0u1154u30s0ndf7eme90u890ko3tq0s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chesh",
+            "certificate_hash": "c1465cf64bdcbaf82c245a69d590dc70c451da30"
+          }
+        },
+        {
+          "client_id": "750649718921-5utcek3vkl10inrnubgupshoeu1tjuh9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0Mj_Nu8enc0xv2-fs_Owp9LiivrBFW4o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750649718921-5utcek3vkl10inrnubgupshoeu1tjuh9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
