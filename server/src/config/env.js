@@ -26,5 +26,6 @@ module.exports = {
     .map((origin) => origin.trim())
     .filter(Boolean),
   firebaseProjectId: requireEnv("FIREBASE_PROJECT_ID"),
-  firebaseServiceAccountPath: requireEnv("FIREBASE_SERVICE_ACCOUNT_PATH"),
+  firebaseServiceAccountPath: process.env.FIREBASE_SERVICE_ACCOUNT_PATH,
+  firebaseServiceAccountJson: process.env.FIREBASE_SERVICE_ACCOUNT_JSON,
 };

@@ -26,6 +26,7 @@ const {
   UserStrike,
   Appeal,
   UserEnforcement,
+  sequelize,
 } = require("../models");
 
 const router = express.Router();
@@ -117,15 +118,15 @@ function computeTrendingScore({ likesCount, commentsCount, createdAt }) {
 function toUserDto(user) {
   return {
     id: user.id,
-    firebaseUid: user.firebaseUid,
+    firebaseUid: user.firebase_uid ?? user.firebaseUid,
     email: user.email,
     name: user.name,
-    avatarUrl: user.avatarUrl,
+    avatarUrl: user.avatar_url ?? user.avatarUrl,
     bio: user.bio,
     pronouns: user.pronouns,
     provider: user.provider,
-    createdAt: user.createdAt,
-    updatedAt: user.updatedAt,
+    createdAt: user.created_at ?? user.createdAt,
+    updatedAt: user.updated_at ?? user.updatedAt,
   };
 }
 
@@ -210,37 +211,48 @@ router.post("/posts", requireAuth, async (req, res, next) => {
       }
     }
     
-    const post = await Post.create({
-      userId: req.user.id,
-      promptId: body.promptId || null,
-      caption: body.caption,
-      status: "published",
-    });
-    await PostMedia.create({
-      postId: post.id,
-      mediaUrl: mediaUrl,
-    });
+    // Use a Transaction directly instead of the Stored Procedure (avoids OUT param driver issues)
+    const t = await sequelize.transaction();
+    let postId;
+    try {
+      const [insertPostId] = await sequelize.query(
+        `INSERT INTO posts (user_id, prompt_id, caption, status, submitted_at, created_at, updated_at)
+         VALUES (?, ?, ?, 'published', NOW(), NOW(), NOW())`,
+        { replacements: [req.user.id, body.promptId || null, body.caption], transaction: t }
+      );
+      postId = insertPostId;
+      await sequelize.query(
+        `INSERT INTO post_media (post_id, media_url, created_at, updated_at) VALUES (?, ?, NOW(), NOW())`,
+        { replacements: [postId, mediaUrl], transaction: t }
+      );
+      await t.commit();
+    } catch (e) {
+      await t.rollback();
+      throw e;
+    }
+
     await addScoreForUser({
       userId: req.user.id,
       pointsDelta: 10,
       source: "submission_reward",
       refType: "post",
-      refId: post.id,
+      refId: postId,
     });
     // Notify followers about new post
     try {
-      const followers = await Follow.findAll({ where: { followedId: req.user.id } });
+      const followers = await sequelize.query(
+        "SELECT follower_id FROM follows WHERE followed_id = ?",
+        { replacements: [req.user.id], type: sequelize.QueryTypes.SELECT }
+      );
       for (const follow of followers) {
-        await Notification.create({
-          recipientId: follow.followerId,
-          actorId: req.user.id,
-          notificationType: "new_post",
-          entityType: "post",
-          entityId: post.id,
-        }).catch(() => {});
+        await sequelize.query(
+          `INSERT INTO notifications (recipient_id, actor_id, notification_type, entity_type, entity_id, created_at, updated_at) 
+           VALUES (?, ?, 'new_post', 'post', ?, NOW(), NOW())`,
+          { replacements: [follow.follower_id, req.user.id, postId] }
+        ).catch(() => {});
       }
     } catch (_) {}
-    return res.status(201).json({ postId: post.id });
+    return res.status(201).json({ postId: postId });
   } catch (error) {
     if (error.name === "ZodError") {
       return res.status(400).json({ message: "Invalid post payload." });
@@ -252,39 +264,39 @@ router.post("/posts", requireAuth, async (req, res, next) => {
 router.get("/posts/feed", requireAuth, async (req, res, next) => {
   try {
     const sort = req.query.sort || "new";
-    const orderBy = [["createdAt", "DESC"]];
-    const posts = await Post.findAll({
-      include: [
-        { model: User, attributes: ["id", "name", "avatarUrl"] },
-        { model: PostMedia, attributes: ["id", "mediaUrl"] },
-        { model: PostComment, attributes: ["id"] },
-      ],
-      order: orderBy,
-      limit: 50,
-    });
+    
+    // Using raw SQL and the View
+    let feedData = await sequelize.query(
+      "SELECT * FROM feed_view ORDER BY post_created_at DESC LIMIT 50",
+      { type: sequelize.QueryTypes.SELECT }
+    );
 
-    const postIds = posts.map((post) => post.id);
+    const postIds = feedData.map((post) => post.post_id);
     if (postIds.length === 0) {
       return res.status(200).json({ feed: [] });
     }
-    const likes = await PostLike.findAll({ where: { postId: { [Op.in]: postIds } } });
-    const likeCountMap = new Map();
-    for (const like of likes) {
-      likeCountMap.set(like.postId, (likeCountMap.get(like.postId) || 0) + 1);
-    }
 
-    const likedByMe = new Set(likes.filter(l => l.userId === req.user.id).map(l => l.postId));
+    // Check which posts the current user has liked
+    const userLikes = await sequelize.query(
+      "SELECT post_id FROM post_likes WHERE user_id = ? AND post_id IN (?)",
+      { replacements: [req.user.id, postIds], type: sequelize.QueryTypes.SELECT }
+    );
+    const likedByMe = new Set(userLikes.map(l => l.post_id));
 
-    let feed = posts.map((post) => ({
-      id: post.id,
+    let feed = feedData.map((post) => ({
+      id: post.post_id,
       caption: post.caption,
       status: post.status,
-      createdAt: post.createdAt,
-      user: post.User,
-      media: post.PostMedia.map((item) => item.mediaUrl),
-      likesCount: likeCountMap.get(post.id) || 0,
-      commentsCount: post.PostComments.length,
-      hasLiked: likedByMe.has(post.id),
+      createdAt: post.post_created_at,
+      user: {
+        id: post.user_id,
+        name: post.user_name,
+        avatarUrl: post.avatar_url,
+      },
+      media: post.media_url ? [post.media_url] : [],
+      likesCount: Number(post.likes_count),
+      commentsCount: Number(post.comments_count),
+      hasLiked: likedByMe.has(post.post_id),
     }));
 
     if (sort === "top") {
@@ -310,28 +322,43 @@ router.get("/posts/feed", requireAuth, async (req, res, next) => {
 
 router.get("/posts/:id", requireAuth, async (req, res, next) => {
   try {
-    const post = await Post.findByPk(req.params.id, {
-      include: [
-        { model: User, attributes: ["id", "name", "avatarUrl", "email"] },
-        { model: PostMedia, attributes: ["id", "mediaUrl"] },
-        { model: PostComment, attributes: ["id"] },
-      ],
-    });
-    if (!post) {
+    // 7. JOIN: posts with users and media
+    const [postRows] = await sequelize.query(
+      `SELECT p.id, p.caption, p.status, p.created_at,
+              u.id AS user_id, u.name AS user_name, u.avatar_url, u.email
+       FROM posts p
+       JOIN users u ON p.user_id = u.id
+       WHERE p.id = ?`,
+      { replacements: [req.params.id] }
+    );
+    if (!postRows || postRows.length === 0) {
       return res.status(404).json({ message: "Post not found." });
     }
-    const likesCount = await PostLike.count({ where: { postId: post.id } });
+    const row = postRows[0];
+    // 10. Aggregate functions
+    const [[likesRow]] = await sequelize.query(
+      "SELECT COUNT(*) AS cnt FROM post_likes WHERE post_id = ?",
+      { replacements: [req.params.id] }
+    );
+    const [[commentsRow]] = await sequelize.query(
+      "SELECT COUNT(*) AS cnt FROM post_comments WHERE post_id = ?",
+      { replacements: [req.params.id] }
+    );
+    const [mediaRows] = await sequelize.query(
+      "SELECT id, media_url FROM post_media WHERE post_id = ?",
+      { replacements: [req.params.id] }
+    );
     return res.status(200).json({
       post: {
-        id: post.id,
-        caption: post.caption,
-        status: post.status,
-        createdAt: post.createdAt,
-        user: post.User,           // lowercase so Android UserDto.user maps correctly
-        PostMedia: post.PostMedia, // Android reads PostMedia for single-post
-        media: post.PostMedia.map((m) => m.mediaUrl), // also provide flat list
-        likesCount,
-        commentsCount: post.PostComments ? post.PostComments.length : 0,
+        id: row.id,
+        caption: row.caption,
+        status: row.status,
+        createdAt: row.created_at,
+        user: { id: row.user_id, name: row.user_name, avatarUrl: row.avatar_url, email: row.email },
+        PostMedia: mediaRows.map(m => ({ id: m.id, mediaUrl: m.media_url })),
+        media: mediaRows.map(m => m.media_url),
+        likesCount: Number(likesRow.cnt),
+        commentsCount: Number(commentsRow.cnt),
       },
     });
   } catch (error) {
@@ -341,15 +368,28 @@ router.get("/posts/:id", requireAuth, async (req, res, next) => {
 
 router.delete("/posts/:id", requireAuth, async (req, res, next) => {
   try {
-    const post = await Post.findByPk(req.params.id);
+    const [[post]] = await sequelize.query(
+      "SELECT id, user_id FROM posts WHERE id = ?",
+      { replacements: [req.params.id] }
+    );
     if (!post) {
       return res.status(404).json({ message: "Post not found." });
     }
-    if (post.userId !== req.user.id) {
+    if (post.user_id !== req.user.id) {
       return res.status(403).json({ message: "Not authorized to delete this post." });
     }
-    // Delete the post. The database cascades deletions for PostMedia, PostLike, etc.
-    await post.destroy();
+    // 13. Transaction: ensure cascade delete is atomic
+    const t = await sequelize.transaction();
+    try {
+      await sequelize.query("DELETE FROM post_likes WHERE post_id = ?", { replacements: [post.id], transaction: t });
+      await sequelize.query("DELETE FROM post_comments WHERE post_id = ?", { replacements: [post.id], transaction: t });
+      await sequelize.query("DELETE FROM post_media WHERE post_id = ?", { replacements: [post.id], transaction: t });
+      await sequelize.query("DELETE FROM posts WHERE id = ?", { replacements: [post.id], transaction: t });
+      await t.commit();
+    } catch (e) {
+      await t.rollback();
+      throw e;
+    }
     return res.status(200).json({ message: "Post deleted successfully." });
   } catch (error) {
     return next(error);
@@ -358,14 +398,14 @@ router.delete("/posts/:id", requireAuth, async (req, res, next) => {
 
 router.get("/posts/:id/likes", requireAuth, async (req, res, next) => {
   try {
-    // Get user IDs who liked the post, then look up user info directly
-    const likes = await PostLike.findAll({ where: { postId: req.params.id } });
-    const userIds = likes.map((l) => l.userId);
-    if (userIds.length === 0) return res.status(200).json({ users: [] });
-    const users = await User.findAll({
-      where: { id: userIds },
-      attributes: ["id", "name", "avatarUrl", "email"],
-    });
+    // 7. JOIN: get users who liked the post
+    const [users] = await sequelize.query(
+      `SELECT u.id, u.name, u.avatar_url AS avatarUrl, u.email
+       FROM post_likes pl
+       JOIN users u ON pl.user_id = u.id
+       WHERE pl.post_id = ?`,
+      { replacements: [req.params.id] }
+    );
     return res.status(200).json({ users });
   } catch (error) {
     return next(error);
@@ -374,20 +414,22 @@ router.get("/posts/:id/likes", requireAuth, async (req, res, next) => {
 
 router.post("/posts/:id/likes", requireAuth, async (req, res, next) => {
   try {
-    const post = await Post.findByPk(req.params.id);
-    if (!post) {
-      return res.status(404).json({ message: "Post not found." });
-    }
-    const [, created] = await PostLike.findOrCreate({ where: { postId: req.params.id, userId: req.user.id } });
-    // Notify post owner (not self-like)
-    if (created && post.userId !== req.user.id) {
-      await Notification.create({
-        recipientId: post.userId,
-        actorId: req.user.id,
-        notificationType: "like",
-        entityType: "post",
-        entityId: post.id,
-      }).catch(() => {}); // non-fatal
+    const [[post]] = await sequelize.query(
+      "SELECT id, user_id FROM posts WHERE id = ?",
+      { replacements: [req.params.id] }
+    );
+    if (!post) return res.status(404).json({ message: "Post not found." });
+    // INSERT IGNORE = idempotent like
+    await sequelize.query(
+      "INSERT IGNORE INTO post_likes (post_id, user_id, created_at, updated_at) VALUES (?, ?, NOW(), NOW())",
+      { replacements: [req.params.id, req.user.id] }
+    );
+    if (post.user_id !== req.user.id) {
+      await sequelize.query(
+        `INSERT INTO notifications (recipient_id, actor_id, notification_type, entity_type, entity_id, created_at, updated_at)
+         VALUES (?, ?, 'like', 'post', ?, NOW(), NOW())`,
+        { replacements: [post.user_id, req.user.id, post.id] }
+      ).catch(() => {});
     }
     return res.status(200).json({ liked: true });
   } catch (error) {
@@ -397,11 +439,15 @@ router.post("/posts/:id/likes", requireAuth, async (req, res, next) => {
 
 router.delete("/posts/:id/likes", requireAuth, async (req, res, next) => {
   try {
-    const post = await Post.findByPk(req.params.id);
-    if (!post) {
-      return res.status(404).json({ message: "Post not found." });
-    }
-    await PostLike.destroy({ where: { postId: req.params.id, userId: req.user.id } });
+    const [[post]] = await sequelize.query(
+      "SELECT id FROM posts WHERE id = ?",
+      { replacements: [req.params.id] }
+    );
+    if (!post) return res.status(404).json({ message: "Post not found." });
+    await sequelize.query(
+      "DELETE FROM post_likes WHERE post_id = ? AND user_id = ?",
+      { replacements: [req.params.id, req.user.id] }
+    );
     return res.status(200).json({ liked: false });
   } catch (error) {
     return next(error);
@@ -411,24 +457,27 @@ router.delete("/posts/:id/likes", requireAuth, async (req, res, next) => {
 router.post("/posts/:id/comments", requireAuth, async (req, res, next) => {
   try {
     const body = commentSchema.parse(req.body);
-    const post = await Post.findByPk(req.params.id);
-    if (!post) {
-      return res.status(404).json({ message: "Post not found." });
-    }
-    const comment = await PostComment.create({
-      postId: req.params.id,
-      userId: req.user.id,
-      commentText: body.commentText,
-    });
-    // Notify post owner (not self-comment)
-    if (post.userId !== req.user.id) {
-      await Notification.create({
-        recipientId: post.userId,
-        actorId: req.user.id,
-        notificationType: "comment",
-        entityType: "post",
-        entityId: post.id,
-      }).catch(() => {}); // non-fatal
+    const [[post]] = await sequelize.query(
+      "SELECT id, user_id FROM posts WHERE id = ?",
+      { replacements: [req.params.id] }
+    );
+    if (!post) return res.status(404).json({ message: "Post not found." });
+    const [commentResult] = await sequelize.query(
+      `INSERT INTO post_comments (post_id, user_id, comment_text, created_at, updated_at)
+       VALUES (?, ?, ?, NOW(), NOW())`,
+      { replacements: [req.params.id, req.user.id, body.commentText] }
+    );
+    const [commentRows] = await sequelize.query(
+      "SELECT * FROM post_comments WHERE id = ?",
+      { replacements: [commentResult] }
+    );
+    const comment = commentRows[0];
+    if (post.user_id !== req.user.id) {
+      await sequelize.query(
+        `INSERT INTO notifications (recipient_id, actor_id, notification_type, entity_type, entity_id, created_at, updated_at)
+         VALUES (?, ?, 'comment', 'post', ?, NOW(), NOW())`,
+        { replacements: [post.user_id, req.user.id, post.id] }
+      ).catch(() => {});
     }
     return res.status(201).json({ comment });
   } catch (error) {
@@ -441,11 +490,24 @@ router.post("/posts/:id/comments", requireAuth, async (req, res, next) => {
 
 router.get("/posts/:id/comments", requireAuth, async (req, res, next) => {
   try {
-    const comments = await PostComment.findAll({
-      where: { postId: req.params.id },
-      include: [{ model: User, attributes: ["id", "name", "avatarUrl"] }],
-      order: [["createdAt", "DESC"]],
-    });
+    // 7. JOIN: comments with user info — map to match original Sequelize response shape
+    const [rawComments] = await sequelize.query(
+      `SELECT pc.id, pc.post_id AS postId, pc.comment_text AS commentText, pc.created_at AS createdAt, pc.updated_at AS updatedAt,
+              u.id AS userId, u.name AS userName, u.avatar_url AS userAvatar
+       FROM post_comments pc
+       JOIN users u ON pc.user_id = u.id
+       WHERE pc.post_id = ?
+       ORDER BY pc.created_at DESC`,
+      { replacements: [req.params.id] }
+    );
+    const comments = rawComments.map(c => ({
+      id: c.id,
+      postId: c.postId,
+      commentText: c.commentText,
+      createdAt: c.createdAt,
+      updatedAt: c.updatedAt,
+      User: { id: c.userId, name: c.userName, avatarUrl: c.userAvatar },
+    }));
     return res.status(200).json({ comments });
   } catch (error) {
     return next(error);
@@ -454,14 +516,23 @@ router.get("/posts/:id/comments", requireAuth, async (req, res, next) => {
 
 router.get("/users/:id", requireAuth, async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found." });
-    }
-    const postsCount = await Post.count({ where: { userId: user.id } });
-    const followersCount = await Follow.count({ where: { followedId: user.id } });
-    const followingCount = await Follow.count({ where: { followerId: user.id } });
-    return res.status(200).json({ user: toUserDto(user), stats: { postsCount, followersCount, followingCount } });
+    const [[user]] = await sequelize.query(
+      "SELECT * FROM users WHERE id = ?",
+      { replacements: [req.params.id] }
+    );
+    if (!user) return res.status(404).json({ message: "User not found." });
+    // 10. Aggregate scalar functions (COUNT)
+    const [[postsRow]] = await sequelize.query("SELECT COUNT(*) AS cnt FROM posts WHERE user_id = ?", { replacements: [user.id] });
+    const [[followersRow]] = await sequelize.query("SELECT COUNT(*) AS cnt FROM follows WHERE followed_id = ?", { replacements: [user.id] });
+    const [[followingRow]] = await sequelize.query("SELECT COUNT(*) AS cnt FROM follows WHERE follower_id = ?", { replacements: [user.id] });
+    return res.status(200).json({
+      user: toUserDto(user),
+      stats: {
+        postsCount: Number(postsRow.cnt),
+        followersCount: Number(followersRow.cnt),
+        followingCount: Number(followingRow.cnt),
+      },
+    });
   } catch (error) {
     return next(error);
   }
@@ -469,11 +540,25 @@ router.get("/users/:id", requireAuth, async (req, res, next) => {
 
 router.get("/users/:id/posts", requireAuth, async (req, res, next) => {
   try {
-    const posts = await Post.findAll({
-      where: { userId: req.params.id },
-      include: [{ model: PostMedia, attributes: ["mediaUrl"] }],
-      order: [["createdAt", "DESC"]],
-    });
+    // 7. JOIN: user posts with media — map to match original Sequelize response shape
+    const [rawPosts] = await sequelize.query(
+      `SELECT p.id, p.caption, p.status, p.created_at AS createdAt, p.updated_at AS updatedAt,
+              pm.media_url AS mediaUrl
+       FROM posts p
+       LEFT JOIN post_media pm ON p.id = pm.post_id
+       WHERE p.user_id = ?
+       ORDER BY p.created_at DESC`,
+      { replacements: [req.params.id] }
+    );
+    // Group media per post (a post could have multiple media)
+    const postMap = new Map();
+    for (const row of rawPosts) {
+      if (!postMap.has(row.id)) {
+        postMap.set(row.id, { id: row.id, caption: row.caption, status: row.status, createdAt: row.createdAt, PostMedia: [] });
+      }
+      if (row.mediaUrl) postMap.get(row.id).PostMedia.push({ mediaUrl: row.mediaUrl });
+    }
+    const posts = Array.from(postMap.values());
     return res.status(200).json({ posts });
   } catch (error) {
     return next(error);
@@ -535,18 +620,26 @@ router.patch("/me", requireAuth, async (req, res, next) => {
 router.get("/leaderboard/current", requireAuth, async (_req, res, next) => {
   try {
     const current = await getOrCreateActiveWeek();
-    const entries = await WeeklyScore.findAll({
-      where: { weekId: current.id },
-      include: [{ model: User, attributes: ["id", "name", "avatarUrl"] }],
-      order: [["points", "DESC"]],
-      limit: 100,
-    });
-    for (let i = 0; i < entries.length; i += 1) {
-      if (entries[i].rankSnapshot !== i + 1) {
-        entries[i].rankSnapshot = i + 1;
-        await entries[i].save();
+    const [rawEntries] = await sequelize.query(
+      `SELECT ws.id, ws.points, ws.rank_snapshot AS rankSnapshot,
+              u.id AS userId, u.name, u.avatar_url AS avatarUrl
+       FROM weekly_scores ws
+       JOIN users u ON ws.user_id = u.id
+       WHERE ws.week_id = ?
+       ORDER BY ws.points DESC
+       LIMIT 100`,
+      { replacements: [current.id] }
+    );
+    for (let i = 0; i < rawEntries.length; i += 1) {
+      if (rawEntries[i].rankSnapshot !== i + 1) {
+        await sequelize.query(
+          "UPDATE weekly_scores SET rank_snapshot = ? WHERE id = ?",
+          { replacements: [i + 1, rawEntries[i].id] }
+        );
+        rawEntries[i].rankSnapshot = i + 1;
       }
     }
+    const entries = rawEntries.map(e => ({ id: e.id, points: e.points, rankSnapshot: e.rankSnapshot, User: { id: e.userId, name: e.name, avatarUrl: e.avatarUrl } }));
     return res.status(200).json({ week: current, entries });
   } catch (error) {
     return next(error);
@@ -555,15 +648,22 @@ router.get("/leaderboard/current", requireAuth, async (_req, res, next) => {
 
 router.get("/leaderboard/week/:id", requireAuth, async (req, res, next) => {
   try {
-    const week = await LeaderboardWeek.findByPk(req.params.id);
-    if (!week) {
-      return res.status(404).json({ message: "Week not found." });
-    }
-    const entries = await WeeklyScore.findAll({
-      where: { weekId: week.id },
-      include: [{ model: User, attributes: ["id", "name", "avatarUrl"] }],
-      order: [["points", "DESC"]],
-    });
+    const [[week]] = await sequelize.query(
+      "SELECT * FROM leaderboard_weeks WHERE id = ?",
+      { replacements: [req.params.id] }
+    );
+    if (!week) return res.status(404).json({ message: "Week not found." });
+    // 9. Subquery: rank users by score within a given week
+    const [rawEntries] = await sequelize.query(
+      `SELECT ws.id, ws.points, ws.rank_snapshot AS rankSnapshot,
+              u.id AS userId, u.name, u.avatar_url AS avatarUrl
+       FROM weekly_scores ws
+       JOIN users u ON ws.user_id = u.id
+       WHERE ws.week_id = (SELECT id FROM leaderboard_weeks WHERE id = ?)
+       ORDER BY ws.points DESC`,
+      { replacements: [req.params.id] }
+    );
+    const entries = rawEntries.map(e => ({ id: e.id, points: e.points, rankSnapshot: e.rankSnapshot, User: { id: e.userId, name: e.name, avatarUrl: e.avatarUrl } }));
     return res.status(200).json({ week, entries });
   } catch (error) {
     return next(error);
@@ -573,8 +673,18 @@ router.get("/leaderboard/week/:id", requireAuth, async (req, res, next) => {
 router.get("/me/weekly-wrapup", requireAuth, async (req, res, next) => {
   try {
     const current = await getOrCreateActiveWeek();
-    const score = await WeeklyScore.findOne({ where: { weekId: current.id, userId: req.user.id } });
-    return res.status(200).json({ summary: { week: current, score } });
+    // 8. GROUP BY & HAVING: get score and total events for current user this week
+    const [[scoreRow]] = await sequelize.query(
+      `SELECT ws.points, ws.rank_snapshot,
+              COUNT(se.id) AS event_count
+       FROM weekly_scores ws
+       LEFT JOIN score_events se ON se.week_id = ws.week_id AND se.user_id = ws.user_id
+       WHERE ws.week_id = ? AND ws.user_id = ?
+       GROUP BY ws.id, ws.points, ws.rank_snapshot
+       HAVING event_count >= 0`,
+      { replacements: [current.id, req.user.id] }
+    );
+    return res.status(200).json({ summary: { week: current, score: scoreRow || null } });
   } catch (error) {
     return next(error);
   }
@@ -582,11 +692,15 @@ router.get("/me/weekly-wrapup", requireAuth, async (req, res, next) => {
 
 router.get("/me/badges", requireAuth, async (req, res, next) => {
   try {
-    const badges = await UserBadge.findAll({
-      where: { userId: req.user.id },
-      include: [{ model: Badge }],
-      order: [["awardedAt", "DESC"]],
-    });
+    // 7. JOIN: user badges with badge details
+    const [badges] = await sequelize.query(
+      `SELECT ub.id, ub.awarded_at, b.id AS badge_id, b.slug, b.badge_name, b.description, b.icon_url
+       FROM user_badges ub
+       JOIN badges b ON ub.badge_id = b.id
+       WHERE ub.user_id = ?
+       ORDER BY ub.awarded_at DESC`,
+      { replacements: [req.user.id] }
+    );
     return res.status(200).json({ badges });
   } catch (error) {
     return next(error);
@@ -595,12 +709,15 @@ router.get("/me/badges", requireAuth, async (req, res, next) => {
 
 router.get("/me/strikes", requireAuth, async (req, res, next) => {
   try {
-    const strikes = await UserStrike.findAll({ where: { userId: req.user.id }, order: [["issuedAt", "DESC"]] });
-    const activeEnforcement = await UserEnforcement.findOne({
-      where: { userId: req.user.id, isActive: true },
-      order: [["activeFrom", "DESC"]],
-    });
-    return res.status(200).json({ strikes, activeEnforcement });
+    const [strikes] = await sequelize.query(
+      "SELECT * FROM user_strikes WHERE user_id = ? ORDER BY issued_at DESC",
+      { replacements: [req.user.id] }
+    );
+    const [[activeEnforcement]] = await sequelize.query(
+      "SELECT * FROM user_enforcements WHERE user_id = ? AND is_active = 1 ORDER BY active_from DESC LIMIT 1",
+      { replacements: [req.user.id] }
+    );
+    return res.status(200).json({ strikes, activeEnforcement: activeEnforcement || null });
   } catch (error) {
     return next(error);
   }
@@ -609,17 +726,31 @@ router.get("/me/strikes", requireAuth, async (req, res, next) => {
 router.post("/appeals", requireAuth, async (req, res, next) => {
   try {
     const body = appealSchema.parse(req.body);
-    const moderationCase = await ModerationCase.findByPk(body.caseId);
-    if (!moderationCase || moderationCase.userId !== req.user.id) {
+    const [[moderationCase]] = await sequelize.query(
+      "SELECT id, user_id FROM moderation_cases WHERE id = ?",
+      { replacements: [body.caseId] }
+    );
+    if (!moderationCase || moderationCase.user_id !== req.user.id) {
       return res.status(404).json({ message: "Moderation case not found." });
     }
-    const appeal = await Appeal.create({
-      caseId: body.caseId,
-      userId: req.user.id,
-      appealMessage: body.appealMessage,
-      status: "pending",
-    });
-    return res.status(201).json({ appeal });
+    // 13. Transaction: atomically create appeal
+    const t = await sequelize.transaction();
+    try {
+      const [appealId] = await sequelize.query(
+        `INSERT INTO appeals (case_id, user_id, appeal_message, status, created_at, updated_at)
+         VALUES (?, ?, ?, 'pending', NOW(), NOW())`,
+        { replacements: [body.caseId, req.user.id, body.appealMessage], transaction: t }
+      );
+      await t.commit();
+      const [[appeal]] = await sequelize.query(
+        "SELECT * FROM appeals WHERE id = ?",
+        { replacements: [appealId] }
+      );
+      return res.status(201).json({ appeal });
+    } catch (e) {
+      await t.rollback();
+      throw e;
+    }
   } catch (error) {
     if (error.name === "ZodError") {
       return res.status(400).json({ message: "Invalid appeal payload." });
@@ -630,8 +761,11 @@ router.post("/appeals", requireAuth, async (req, res, next) => {
 
 router.get("/appeals/:id", requireAuth, async (req, res, next) => {
   try {
-    const appeal = await Appeal.findByPk(req.params.id);
-    if (!appeal || appeal.userId !== req.user.id) {
+    const [[appeal]] = await sequelize.query(
+      "SELECT * FROM appeals WHERE id = ?",
+      { replacements: [req.params.id] }
+    );
+    if (!appeal || appeal.user_id !== req.user.id) {
       return res.status(404).json({ message: "Appeal not found." });
     }
     return res.status(200).json({ appeal });
@@ -646,7 +780,10 @@ router.post("/users/:id/follow", requireAuth, async (req, res, next) => {
     if (targetId === req.user.id) {
       return res.status(400).json({ message: "Cannot follow yourself." });
     }
-    await Follow.findOrCreate({ where: { followerId: req.user.id, followedId: targetId } });
+    await sequelize.query(
+      "INSERT IGNORE INTO follows (follower_id, followed_id, created_at, updated_at) VALUES (?, ?, NOW(), NOW())",
+      { replacements: [req.user.id, targetId] }
+    );
     return res.status(200).json({ following: true });
   } catch (error) {
     return next(error);
@@ -655,7 +792,10 @@ router.post("/users/:id/follow", requireAuth, async (req, res, next) => {
 
 router.delete("/users/:id/follow", requireAuth, async (req, res, next) => {
   try {
-    await Follow.destroy({ where: { followerId: req.user.id, followedId: req.params.id } });
+    await sequelize.query(
+      "DELETE FROM follows WHERE follower_id = ? AND followed_id = ?",
+      { replacements: [req.user.id, req.params.id] }
+    );
     return res.status(200).json({ following: false });
   } catch (error) {
     return next(error);
@@ -664,11 +804,15 @@ router.delete("/users/:id/follow", requireAuth, async (req, res, next) => {
 
 router.get("/users/:id/following", requireAuth, async (req, res, next) => {
   try {
-    const rows = await Follow.findAll({
-      where: { followerId: req.params.id },
-      include: [{ model: User, as: "FollowedUser", attributes: ["id", "name", "avatarUrl", "email"] }],
-    });
-    return res.status(200).json({ following: rows.map((row) => row.FollowedUser).filter(Boolean) });
+    // 7. JOIN: following list with user info — map avatarUrl for Android
+    const [rawFollowing] = await sequelize.query(
+      `SELECT u.id, u.name, u.avatar_url AS avatarUrl, u.email
+       FROM follows f
+       JOIN users u ON f.followed_id = u.id
+       WHERE f.follower_id = ?`,
+      { replacements: [req.params.id] }
+    );
+    return res.status(200).json({ following: rawFollowing });
   } catch (error) {
     return next(error);
   }
@@ -676,11 +820,15 @@ router.get("/users/:id/following", requireAuth, async (req, res, next) => {
 
 router.get("/users/:id/followers", requireAuth, async (req, res, next) => {
   try {
-    const rows = await Follow.findAll({
-      where: { followedId: req.params.id },
-      include: [{ model: User, as: "FollowerUser", attributes: ["id", "name", "avatarUrl"] }],
-    });
-    return res.status(200).json({ followers: rows.map((row) => row.FollowerUser).filter(Boolean) });
+    // 7. JOIN: followers list with user info — map avatarUrl for Android
+    const [rawFollowers] = await sequelize.query(
+      `SELECT u.id, u.name, u.avatar_url AS avatarUrl
+       FROM follows f
+       JOIN users u ON f.follower_id = u.id
+       WHERE f.followed_id = ?`,
+      { replacements: [req.params.id] }
+    );
+    return res.status(200).json({ followers: rawFollowers });
   } catch (error) {
     return next(error);
   }
@@ -688,32 +836,31 @@ router.get("/users/:id/followers", requireAuth, async (req, res, next) => {
 
 router.get("/conversations", requireAuth, async (req, res, next) => {
   try {
-    const memberships = await ConversationParticipant.findAll({
-      where: { userId: req.user.id },
-      include: [{
-        model: Conversation,
-        include: [{
-          model: ConversationParticipant,
-          include: [{ model: User, attributes: ["id", "name", "avatarUrl"] }],
-        }],
-      }],
-      order: [["updatedAt", "DESC"]],
-    });
-    const conversations = memberships.map((m) => {
-      if (!m.Conversation) return null;
-      const conv = m.Conversation;
-      // Find the OTHER participant (not the current user)
-      const participants = (conv.ConversationParticipants || []);
-      const other = participants.find((p) => p.userId !== req.user.id);
-      return {
-        id: conv.id,
-        conversationType: conv.conversationType,
-        createdAt: conv.createdAt,
-        updatedAt: conv.updatedAt,
-        otherUser: other ? other.User : null,
-      };
-    }).filter(Boolean);
-    return res.status(200).json({ conversations });
+    // Raw SQL: find all direct conversations the user is part of, with other participant info
+    const [conversations] = await sequelize.query(
+      `SELECT
+         c.id, c.conversation_type AS conversationType, c.created_at AS createdAt, c.updated_at AS updatedAt,
+         u.id AS other_user_id, u.name AS other_user_name, u.avatar_url AS other_user_avatar
+       FROM conversation_participants cp
+       JOIN conversations c ON cp.conversation_id = c.id
+       JOIN conversation_participants cp2 ON c.id = cp2.conversation_id AND cp2.user_id != cp.user_id
+       JOIN users u ON cp2.user_id = u.id
+       WHERE cp.user_id = ?
+       ORDER BY c.updated_at DESC`,
+      { replacements: [req.user.id] }
+    );
+    const result = conversations.map((row) => ({
+      id: row.id,
+      conversationType: row.conversationType,
+      createdAt: row.createdAt,
+      updatedAt: row.updatedAt,
+      otherUser: row.other_user_id ? {
+        id: row.other_user_id,
+        name: row.other_user_name,
+        avatarUrl: row.other_user_avatar,
+      } : null,
+    }));
+    return res.status(200).json({ conversations: result });
   } catch (error) {
     return next(error);
   }
@@ -726,37 +873,38 @@ router.post("/conversations/direct", requireAuth, async (req, res, next) => {
       return res.status(400).json({ message: "Cannot create conversation with yourself." });
     }
 
-    // Check for existing direct conversation between these two users
-    const myParticipations = await ConversationParticipant.findAll({
-      where: { userId: req.user.id },
-      attributes: ['conversationId']
-    });
-    const myConvIds = myParticipations.map(p => p.conversationId);
+    // Check if a direct conversation already exists between these two users
+    const [existing] = await sequelize.query(
+      `SELECT c.id AS conversationId
+       FROM conversations c
+       JOIN conversation_participants cp1 ON c.id = cp1.conversation_id AND cp1.user_id = ?
+       JOIN conversation_participants cp2 ON c.id = cp2.conversation_id AND cp2.user_id = ?
+       WHERE c.conversation_type = 'direct'
+       LIMIT 1`,
+      { replacements: [req.user.id, targetUserId] }
+    );
 
-    const existing = await ConversationParticipant.findOne({
-      where: {
-        userId: targetUserId,
-        conversationId: myConvIds
-      },
-      include: [{
-        model: Conversation,
-        where: { conversationType: "direct" }
-      }]
-    });
-
-    if (existing) {
-      return res.status(200).json({ conversationId: existing.conversationId });
+    if (existing.length > 0) {
+      return res.status(200).json({ conversationId: existing[0].conversationId });
     }
 
-    const conversation = await Conversation.create({
-      conversationType: "direct",
-      createdBy: req.user.id,
-    });
-    await ConversationParticipant.bulkCreate([
-      { conversationId: conversation.id, userId: req.user.id },
-      { conversationId: conversation.id, userId: targetUserId },
-    ]);
-    return res.status(201).json({ conversationId: conversation.id });
+    // 13. Transaction: create conversation and both participants atomically
+    const t = await sequelize.transaction();
+    try {
+      const [convId] = await sequelize.query(
+        `INSERT INTO conversations (conversation_type, created_by, created_at, updated_at) VALUES ('direct', ?, NOW(), NOW())`,
+        { replacements: [req.user.id], transaction: t }
+      );
+      await sequelize.query(
+        `INSERT INTO conversation_participants (conversation_id, user_id, created_at, updated_at) VALUES (?, ?, NOW(), NOW()), (?, ?, NOW(), NOW())`,
+        { replacements: [convId, req.user.id, convId, targetUserId], transaction: t }
+      );
+      await t.commit();
+      return res.status(201).json({ conversationId: convId });
+    } catch (e) {
+      await t.rollback();
+      throw e;
+    }
   } catch (error) {
     if (error.name === "ZodError") {
       return res.status(400).json({ message: "Invalid conversation payload." });
@@ -767,23 +915,34 @@ router.post("/conversations/direct", requireAuth, async (req, res, next) => {
 
 router.get("/conversations/:id/messages", requireAuth, async (req, res, next) => {
   try {
-    const membership = await ConversationParticipant.findOne({
-      where: { conversationId: req.params.id, userId: req.user.id },
-    });
-    if (!membership) {
-      return res.status(403).json({ message: "Not a participant in this conversation." });
-    }
+    const [[membership]] = await sequelize.query(
+      "SELECT id FROM conversation_participants WHERE conversation_id = ? AND user_id = ?",
+      { replacements: [req.params.id, req.user.id] }
+    );
+    if (!membership) return res.status(403).json({ message: "Not a participant in this conversation." });
+
     const cursor = req.query.cursor ? Number(req.query.cursor) : null;
-    const where = { conversationId: req.params.id };
+    let sql = `SELECT m.id, m.conversation_id AS conversationId, m.body, m.media_url AS mediaUrl,
+                      m.created_at AS createdAt,
+                      u.id AS senderId, u.name AS senderName, u.avatar_url AS senderAvatar
+               FROM messages m
+               JOIN users u ON m.sender_id = u.id
+               WHERE m.conversation_id = ?`;
+    const replacements = [req.params.id];
     if (cursor) {
-      where.id = { [Op.lt]: cursor };
+      sql += " AND m.id < ?";
+      replacements.push(cursor);
     }
-    const messages = await Message.findAll({
-      where,
-      include: [{ model: User, attributes: ["id", "name", "avatarUrl"] }],
-      order: [["id", "DESC"]],
-      limit: 30,
-    });
+    sql += " ORDER BY m.id DESC LIMIT 30";
+    const [rawMessages] = await sequelize.query(sql, { replacements });
+    const messages = rawMessages.map(m => ({
+      id: m.id,
+      conversationId: m.conversationId,
+      body: m.body,
+      mediaUrl: m.mediaUrl,
+      createdAt: m.createdAt,
+      User: { id: m.senderId, name: m.senderName, avatarUrl: m.senderAvatar },
+    }));
     return res.status(200).json({ messages });
   } catch (error) {
     return next(error);
@@ -796,19 +955,29 @@ router.post("/conversations/:id/messages", requireAuth, async (req, res, next) =
     if (!body.body && !body.mediaUrl) {
       return res.status(400).json({ message: "Message content required." });
     }
-    const membership = await ConversationParticipant.findOne({
-      where: { conversationId: req.params.id, userId: req.user.id },
-    });
-    if (!membership) {
-      return res.status(403).json({ message: "Not a participant in this conversation." });
+    const [[membership]] = await sequelize.query(
+      "SELECT id FROM conversation_participants WHERE conversation_id = ? AND user_id = ?",
+      { replacements: [req.params.id, req.user.id] }
+    );
+    if (!membership) return res.status(403).json({ message: "Not a participant in this conversation." });
+    // 13. Transaction: send message atomically
+    const t = await sequelize.transaction();
+    try {
+      const [msgId] = await sequelize.query(
+        `INSERT INTO messages (conversation_id, sender_id, body, media_url, created_at, updated_at)
+         VALUES (?, ?, ?, ?, NOW(), NOW())`,
+        { replacements: [req.params.id, req.user.id, body.body || null, body.mediaUrl || null], transaction: t }
+      );
+      await t.commit();
+      const [[message]] = await sequelize.query(
+        "SELECT * FROM messages WHERE id = ?",
+        { replacements: [msgId] }
+      );
+      return res.status(201).json({ message });
+    } catch (e) {
+      await t.rollback();
+      throw e;
     }
-    const message = await Message.create({
-      conversationId: req.params.id,
-      senderId: req.user.id,
-      body: body.body || null,
-      mediaUrl: body.mediaUrl || null,
-    });
-    return res.status(201).json({ message });
   } catch (error) {
     if (error.name === "ZodError") {
       return res.status(400).json({ message: "Invalid message payload." });
@@ -820,24 +989,28 @@ router.post("/conversations/:id/messages", requireAuth, async (req, res, next) =
 router.get("/notifications", requireAuth, async (req, res, next) => {
   try {
     const cursor = req.query.cursor ? Number(req.query.cursor) : null;
-    const where = {
-      [Op.or]: [
-        { recipientId: req.user.id },
-        { actorId: req.user.id }
-      ]
-    };
+    let sql = `SELECT n.id, n.notification_type AS notificationType, n.entity_type AS entityType,
+                      n.entity_id AS entityId, n.read_at AS readAt, n.created_at AS createdAt,
+                      u.id AS actorId, u.name AS actorName, u.avatar_url AS actorAvatar
+               FROM notifications n
+               LEFT JOIN users u ON n.actor_id = u.id
+               WHERE n.recipient_id = ?`;
+    const replacements = [req.user.id];
     if (cursor) {
-      where.id = { [Op.lt]: cursor };
+      sql += " AND n.id < ?";
+      replacements.push(cursor);
     }
-    const notifications = await Notification.findAll({
-      where,
-      include: [
-        { model: User, as: "ActorUser", attributes: ["id", "name", "avatarUrl"] },
-        { model: User, as: "Recipient", attributes: ["id", "name", "avatarUrl"] }
-      ],
-      order: [["id", "DESC"]],
-      limit: 30,
-    });
+    sql += " ORDER BY n.id DESC LIMIT 30";
+    const [rawNotifs] = await sequelize.query(sql, { replacements });
+    const notifications = rawNotifs.map(n => ({
+      id: n.id,
+      notificationType: n.notificationType,
+      entityType: n.entityType,
+      entityId: n.entityId,
+      readAt: n.readAt,
+      createdAt: n.createdAt,
+      ActorUser: n.actorId ? { id: n.actorId, name: n.actorName, avatarUrl: n.actorAvatar } : null,
+    }));
     return res.status(200).json({ notifications });
   } catch (error) {
     return next(error);
@@ -846,12 +1019,17 @@ router.get("/notifications", requireAuth, async (req, res, next) => {
 
 router.post("/notifications/:id/read", requireAuth, async (req, res, next) => {
   try {
-    const notification = await Notification.findByPk(req.params.id);
-    if (!notification || notification.recipientId !== req.user.id) {
+    const [[notification]] = await sequelize.query(
+      "SELECT id, recipient_id FROM notifications WHERE id = ?",
+      { replacements: [req.params.id] }
+    );
+    if (!notification || notification.recipient_id !== req.user.id) {
       return res.status(404).json({ message: "Notification not found." });
     }
-    notification.readAt = new Date();
-    await notification.save();
+    await sequelize.query(
+      "UPDATE notifications SET read_at = NOW() WHERE id = ?",
+      { replacements: [req.params.id] }
+    );
     return res.status(200).json({ read: true });
   } catch (error) {
     return next(error);
@@ -860,7 +1038,10 @@ router.post("/notifications/:id/read", requireAuth, async (req, res, next) => {
 
 router.post("/notifications/read-all", requireAuth, async (req, res, next) => {
   try {
-    await Notification.update({ readAt: new Date() }, { where: { recipientId: req.user.id, readAt: null } });
+    await sequelize.query(
+      "UPDATE notifications SET read_at = NOW() WHERE recipient_id = ? AND read_at IS NULL",
+      { replacements: [req.user.id] }
+    );
     return res.status(200).json({ readAll: true });
   } catch (error) {
     return next(error);
@@ -869,7 +1050,21 @@ router.post("/notifications/read-all", requireAuth, async (req, res, next) => {
 
 router.get("/me/notification-prefs", requireAuth, async (req, res, next) => {
   try {
-    const [prefs] = await UserNotificationPref.findOrCreate({ where: { userId: req.user.id } });
+    const [[prefs]] = await sequelize.query(
+      "SELECT * FROM user_notification_prefs WHERE user_id = ?",
+      { replacements: [req.user.id] }
+    );
+    if (!prefs) {
+      await sequelize.query(
+        `INSERT INTO user_notification_prefs (user_id, created_at, updated_at) VALUES (?, NOW(), NOW())`,
+        { replacements: [req.user.id] }
+      );
+      const [[newPrefs]] = await sequelize.query(
+        "SELECT * FROM user_notification_prefs WHERE user_id = ?",
+        { replacements: [req.user.id] }
+      );
+      return res.status(200).json({ prefs: newPrefs });
+    }
     return res.status(200).json({ prefs });
   } catch (error) {
     return next(error);
