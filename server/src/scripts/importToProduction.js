@@ -12,7 +12,7 @@ async function importData() {
     }
 
     const data = JSON.parse(fs.readFileSync(dataPath, "utf8"));
-    const bucket = getFirebaseStorage();
+    const bucket = getFirebaseStorage().storage.bucket("chesh-a1ff5.appspot.com");
 
     console.log("Starting migration to production...");
     await sequelize.authenticate();
