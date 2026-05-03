@@ -38,4 +38,7 @@ module.exports = {
   getFirebaseAuth() {
     return getFirebaseApp().auth();
   },
+  getFirebaseStorage() {
+    return getFirebaseApp().storage().bucket(`${env.firebaseProjectId}.firebasestorage.app`);
+  },
 };
