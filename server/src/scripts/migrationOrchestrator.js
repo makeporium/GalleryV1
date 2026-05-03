@@ -3,7 +3,7 @@ const path = require("path");
 const { execSync } = require("child_process");
 
 async function orchestrateMigration() {
-  const sentinelPath = "/app/uploads/.migration_done";
+  const sentinelPath = "/app/uploads/.migration_done_v2";
   
   // Only run if the sentinel file is missing
   if (fs.existsSync(sentinelPath)) {

@@ -1,4 +1,9 @@
-const { sequelize, User, Post, PostMedia, PostLike, PostComment, Follow } = require("../models");
+const { 
+  sequelize, User, DailyPrompt, Post, PostMedia, PostLike, PostComment, 
+  Follow, Conversation, ConversationParticipant, Message, Notification, 
+  UserNotificationPref, LeaderboardWeek, WeeklyScore, ScoreEvent, Badge, 
+  UserBadge, ModerationCase, UserStrike, Appeal, UserEnforcement 
+} = require("../models");
 const fs = require("fs");
 const path = require("path");
 
@@ -6,86 +11,58 @@ async function importData() {
   try {
     const dataPath = path.join(__dirname, "../../local_data_dump.json");
     if (!fs.existsSync(dataPath)) {
-      console.error("local_data_dump.json not found! Did you run exportLocalData.js?");
+      console.error("local_data_dump.json not found!");
       process.exit(1);
     }
 
     const data = JSON.parse(fs.readFileSync(dataPath, "utf8"));
     const productionUrl = "https://galleryv1-production.up.railway.app";
 
-    console.log("Starting migration to production (Railway Storage)...");
+    console.log("Starting full migration to production (Railway Storage)...");
     await sequelize.authenticate();
 
-    // Helper to fix local paths to Railway paths
     const fixUrl = (localPath) => {
       if (!localPath || (!localPath.includes("uploads/") && !localPath.includes("uploads\\"))) return localPath;
-      
       const fileName = path.basename(localPath);
-      // In production, we serve from /uploads route
       return `${productionUrl}/uploads/${fileName}`;
     };
 
-    // 1. Users
-    console.log("Migrating users...");
-    for (const u of data.users) {
-      const avatarUrl = fixUrl(u.avatarUrl);
-      console.log(`Upserting user: ${u.email}`);
-      await User.upsert({
-        id: u.id,
-        firebaseUid: u.firebaseUid,
-        email: u.email,
-        name: u.name,
-        avatarUrl: avatarUrl,
-        bio: u.bio,
-        pronouns: u.pronouns,
-        provider: u.provider,
-        createdAt: u.createdAt,
-        updatedAt: u.updatedAt
-      });
-    }
+    const upsertBatch = async (model, items, label) => {
+      if (!items || items.length === 0) return;
+      console.log(`Migrating ${label}...`);
+      for (const item of items) {
+        // Handle field mapping for images
+        if (item.avatarUrl) item.avatarUrl = fixUrl(item.avatarUrl);
+        if (item.mediaUrl) item.mediaUrl = fixUrl(item.mediaUrl);
+        if (item.iconUrl) item.iconUrl = fixUrl(item.iconUrl);
+        
+        await model.upsert(item);
+      }
+    };
 
-    // 2. Posts
-    console.log("Migrating posts...");
-    for (const p of data.posts) {
-      console.log(`Upserting post: ${p.id}`);
-      await Post.upsert({
-        id: p.id,
-        userId: p.userId,
-        promptId: p.promptId,
-        caption: p.caption,
-        status: p.status,
-        submittedAt: p.submittedAt,
-        createdAt: p.createdAt,
-        updatedAt: p.updatedAt
-      });
-    }
+    await upsertBatch(User, data.users, "users");
+    await upsertBatch(DailyPrompt, data.dailyPrompts, "daily prompts");
+    await upsertBatch(Post, data.posts, "posts");
+    await upsertBatch(PostMedia, data.postMedia, "post media");
+    await upsertBatch(PostLike, data.postLikes, "post likes");
+    await upsertBatch(PostComment, data.postComments, "post comments");
+    await upsertBatch(Follow, data.follows, "follows");
+    await upsertBatch(Conversation, data.conversations, "conversations");
+    await upsertBatch(ConversationParticipant, data.conversationParticipants, "participants");
+    await upsertBatch(Message, data.messages, "messages");
+    await upsertBatch(Notification, data.notifications, "notifications");
+    await upsertBatch(UserNotificationPref, data.userNotificationPrefs, "notification prefs");
+    await upsertBatch(LeaderboardWeek, data.leaderboardWeeks, "leaderboard weeks");
+    await upsertBatch(WeeklyScore, data.weeklyScores, "weekly scores");
+    await upsertBatch(ScoreEvent, data.scoreEvents, "score events");
+    await upsertBatch(Badge, data.badges, "badges");
+    await upsertBatch(UserBadge, data.userBadges, "user badges");
+    await upsertBatch(ModerationCase, data.moderationCases, "moderation cases");
+    await upsertBatch(UserStrike, data.userStrikes, "user strikes");
+    await upsertBatch(Appeal, data.appeals, "appeals");
+    await upsertBatch(UserEnforcement, data.userEnforcements, "user enforcements");
 
-    // 3. Post Media
-    console.log("Migrating media...");
-    for (const m of data.postMedia) {
-      const mediaUrl = fixUrl(m.mediaUrl);
-      console.log(`Upserting media for post ${m.postId}: ${mediaUrl}`);
-      await PostMedia.upsert({
-        id: m.id,
-        postId: m.postId,
-        mediaUrl: mediaUrl,
-        storageKey: m.storageKey,
-        mimeType: m.mimeType,
-        width: m.width,
-        height: m.height,
-        phash: m.phash,
-        createdAt: m.createdAt,
-        updatedAt: m.updatedAt
-      });
-    }
-
-    // 4. Likes, Comments, Follows
-    console.log("Migrating social interactions...");
-    for (const l of data.postLikes) await PostLike.upsert(l);
-    for (const c of data.postComments) await PostComment.upsert(c);
-    for (const f of data.follows) await Follow.upsert(f);
-
-    console.log("Migration completed successfully using Railway storage!");
+    console.log("Full migration completed successfully!");
     process.exit(0);
   } catch (error) {
     console.error("Migration failed:", error);

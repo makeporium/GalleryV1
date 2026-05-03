@@ -157,6 +157,53 @@
       "updatedAt": "2026-04-28T09:15:42.000Z"
     }
   ],
+  "dailyPrompts": [
+    {
+      "id": 2,
+      "challengeDate": "2026-04-24",
+      "title": "Street Saturday",
+      "description": "Document life on the streets",
+      "isActive": 1,
+      "createdAt": "2026-04-24T20:18:26.000Z",
+      "updatedAt": "2026-04-24T20:18:26.000Z"
+    },
+    {
+      "id": 3,
+      "challengeDate": "2026-04-25",
+      "title": "Street Saturday",
+      "description": "Document life on the streets",
+      "isActive": 1,
+      "createdAt": "2026-04-25T10:08:49.000Z",
+      "updatedAt": "2026-04-25T10:08:49.000Z"
+    },
+    {
+      "id": 4,
+      "challengeDate": "2026-04-27",
+      "title": "Monochrome Monday",
+      "description": "Share a stunning black and white photo",
+      "isActive": 1,
+      "createdAt": "2026-04-27T16:21:02.000Z",
+      "updatedAt": "2026-04-27T16:21:02.000Z"
+    },
+    {
+      "id": 5,
+      "challengeDate": "2026-04-28",
+      "title": "Texture Tuesday",
+      "description": "Focus on interesting textures and patterns",
+      "isActive": 1,
+      "createdAt": "2026-04-28T04:23:42.000Z",
+      "updatedAt": "2026-04-28T04:23:42.000Z"
+    },
+    {
+      "id": 6,
+      "challengeDate": "2026-05-01",
+      "title": "Foodie Friday",
+      "description": "Capture delicious food or drinks",
+      "isActive": 1,
+      "createdAt": "2026-05-01T17:28:24.000Z",
+      "updatedAt": "2026-05-01T17:28:24.000Z"
+    }
+  ],
   "posts": [
     {
       "id": 1,
@@ -1609,5 +1656,1358 @@
       "createdAt": "2026-05-01T18:57:32.000Z",
       "updatedAt": "2026-05-01T18:57:32.000Z"
     }
-  ]
+  ],
+  "conversations": [
+    {
+      "id": 1,
+      "conversationType": "direct",
+      "createdBy": 1,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 2,
+      "conversationType": "direct",
+      "createdBy": 1,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 3,
+      "conversationType": "direct",
+      "createdBy": 8,
+      "createdAt": "2026-04-24T19:29:51.000Z",
+      "updatedAt": "2026-04-24T19:29:51.000Z"
+    },
+    {
+      "id": 4,
+      "conversationType": "direct",
+      "createdBy": 4,
+      "createdAt": "2026-04-24T19:33:37.000Z",
+      "updatedAt": "2026-04-24T19:33:37.000Z"
+    },
+    {
+      "id": 5,
+      "conversationType": "direct",
+      "createdBy": 8,
+      "createdAt": "2026-04-24T19:48:56.000Z",
+      "updatedAt": "2026-04-24T19:48:56.000Z"
+    },
+    {
+      "id": 6,
+      "conversationType": "direct",
+      "createdBy": 4,
+      "createdAt": "2026-04-24T19:49:36.000Z",
+      "updatedAt": "2026-04-24T19:49:36.000Z"
+    },
+    {
+      "id": 7,
+      "conversationType": "direct",
+      "createdBy": 4,
+      "createdAt": "2026-04-24T20:31:22.000Z",
+      "updatedAt": "2026-04-24T20:31:22.000Z"
+    },
+    {
+      "id": 8,
+      "conversationType": "direct",
+      "createdBy": 8,
+      "createdAt": "2026-04-24T20:53:55.000Z",
+      "updatedAt": "2026-04-24T20:53:55.000Z"
+    },
+    {
+      "id": 9,
+      "conversationType": "direct",
+      "createdBy": 10,
+      "createdAt": "2026-04-27T16:26:41.000Z",
+      "updatedAt": "2026-04-27T16:26:41.000Z"
+    },
+    {
+      "id": 10,
+      "conversationType": "direct",
+      "createdBy": 12,
+      "createdAt": "2026-04-28T04:42:53.000Z",
+      "updatedAt": "2026-04-28T04:42:53.000Z"
+    }
+  ],
+  "conversationParticipants": [
+    {
+      "id": 1,
+      "conversationId": 1,
+      "userId": 1,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 2,
+      "conversationId": 1,
+      "userId": 2,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 3,
+      "conversationId": 2,
+      "userId": 1,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 4,
+      "conversationId": 2,
+      "userId": 3,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 5,
+      "conversationId": 3,
+      "userId": 8,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T19:29:51.000Z",
+      "updatedAt": "2026-04-24T19:29:51.000Z"
+    },
+    {
+      "id": 6,
+      "conversationId": 3,
+      "userId": 4,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T19:29:51.000Z",
+      "updatedAt": "2026-04-24T19:29:51.000Z"
+    },
+    {
+      "id": 7,
+      "conversationId": 4,
+      "userId": 4,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T19:33:37.000Z",
+      "updatedAt": "2026-04-24T19:33:37.000Z"
+    },
+    {
+      "id": 8,
+      "conversationId": 4,
+      "userId": 8,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T19:33:37.000Z",
+      "updatedAt": "2026-04-24T19:33:37.000Z"
+    },
+    {
+      "id": 9,
+      "conversationId": 5,
+      "userId": 8,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T19:48:56.000Z",
+      "updatedAt": "2026-04-24T19:48:56.000Z"
+    },
+    {
+      "id": 10,
+      "conversationId": 5,
+      "userId": 4,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T19:48:56.000Z",
+      "updatedAt": "2026-04-24T19:48:56.000Z"
+    },
+    {
+      "id": 11,
+      "conversationId": 6,
+      "userId": 4,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T19:49:36.000Z",
+      "updatedAt": "2026-04-24T19:49:36.000Z"
+    },
+    {
+      "id": 12,
+      "conversationId": 6,
+      "userId": 8,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T19:49:36.000Z",
+      "updatedAt": "2026-04-24T19:49:36.000Z"
+    },
+    {
+      "id": 13,
+      "conversationId": 7,
+      "userId": 4,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T20:31:22.000Z",
+      "updatedAt": "2026-04-24T20:31:22.000Z"
+    },
+    {
+      "id": 14,
+      "conversationId": 7,
+      "userId": 1,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T20:31:22.000Z",
+      "updatedAt": "2026-04-24T20:31:22.000Z"
+    },
+    {
+      "id": 15,
+      "conversationId": 8,
+      "userId": 8,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T20:53:55.000Z",
+      "updatedAt": "2026-04-24T20:53:55.000Z"
+    },
+    {
+      "id": 16,
+      "conversationId": 8,
+      "userId": 9,
+      "lastReadAt": null,
+      "createdAt": "2026-04-24T20:53:55.000Z",
+      "updatedAt": "2026-04-24T20:53:55.000Z"
+    },
+    {
+      "id": 17,
+      "conversationId": 9,
+      "userId": 10,
+      "lastReadAt": null,
+      "createdAt": "2026-04-27T16:26:41.000Z",
+      "updatedAt": "2026-04-27T16:26:41.000Z"
+    },
+    {
+      "id": 18,
+      "conversationId": 9,
+      "userId": 2,
+      "lastReadAt": null,
+      "createdAt": "2026-04-27T16:26:41.000Z",
+      "updatedAt": "2026-04-27T16:26:41.000Z"
+    },
+    {
+      "id": 19,
+      "conversationId": 10,
+      "userId": 12,
+      "lastReadAt": null,
+      "createdAt": "2026-04-28T04:42:53.000Z",
+      "updatedAt": "2026-04-28T04:42:53.000Z"
+    },
+    {
+      "id": 20,
+      "conversationId": 10,
+      "userId": 10,
+      "lastReadAt": null,
+      "createdAt": "2026-04-28T04:42:53.000Z",
+      "updatedAt": "2026-04-28T04:42:53.000Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "conversationId": 1,
+      "senderId": 1,
+      "body": "Hey! How are you?",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 2,
+      "conversationId": 1,
+      "senderId": 2,
+      "body": "I'm doing great! How about you?",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 3,
+      "conversationId": 2,
+      "senderId": 3,
+      "body": "Your photos are amazing!",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 4,
+      "conversationId": 2,
+      "senderId": 1,
+      "body": "Thank you so much! 😊",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 5,
+      "conversationId": 4,
+      "senderId": 4,
+      "body": "hwyy",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T19:33:41.000Z",
+      "updatedAt": "2026-04-24T19:33:41.000Z"
+    },
+    {
+      "id": 6,
+      "conversationId": 4,
+      "senderId": 8,
+      "body": "heyy",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T19:34:30.000Z",
+      "updatedAt": "2026-04-24T19:34:30.000Z"
+    },
+    {
+      "id": 7,
+      "conversationId": 5,
+      "senderId": 8,
+      "body": "hey",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T19:49:01.000Z",
+      "updatedAt": "2026-04-24T19:49:01.000Z"
+    },
+    {
+      "id": 8,
+      "conversationId": 4,
+      "senderId": 4,
+      "body": "haha",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T19:50:00.000Z",
+      "updatedAt": "2026-04-24T19:50:00.000Z"
+    },
+    {
+      "id": 9,
+      "conversationId": 3,
+      "senderId": 8,
+      "body": "hello",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T20:30:15.000Z",
+      "updatedAt": "2026-04-24T20:30:15.000Z"
+    },
+    {
+      "id": 10,
+      "conversationId": 7,
+      "senderId": 4,
+      "body": "hello oo",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T20:31:25.000Z",
+      "updatedAt": "2026-04-24T20:31:25.000Z"
+    },
+    {
+      "id": 11,
+      "conversationId": 8,
+      "senderId": 8,
+      "body": "DIKH RAHA HAI MESSAGE??",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T20:54:02.000Z",
+      "updatedAt": "2026-04-24T20:54:02.000Z"
+    },
+    {
+      "id": 12,
+      "conversationId": 8,
+      "senderId": 9,
+      "body": "yoo",
+      "mediaUrl": null,
+      "createdAt": "2026-04-24T20:58:04.000Z",
+      "updatedAt": "2026-04-24T20:58:04.000Z"
+    },
+    {
+      "id": 13,
+      "conversationId": 9,
+      "senderId": 10,
+      "body": "hi bob",
+      "mediaUrl": null,
+      "createdAt": "2026-04-27T16:26:45.000Z",
+      "updatedAt": "2026-04-27T16:26:45.000Z"
+    },
+    {
+      "id": 14,
+      "conversationId": 10,
+      "senderId": 12,
+      "body": "hi",
+      "mediaUrl": null,
+      "createdAt": "2026-04-28T04:42:56.000Z",
+      "updatedAt": "2026-04-28T04:42:56.000Z"
+    },
+    {
+      "id": 15,
+      "conversationId": 10,
+      "senderId": 10,
+      "body": "hiee",
+      "mediaUrl": null,
+      "createdAt": "2026-04-28T04:43:13.000Z",
+      "updatedAt": "2026-04-28T04:43:13.000Z"
+    },
+    {
+      "id": 16,
+      "conversationId": 8,
+      "senderId": 8,
+      "body": "update ke baad dikh raha hai message",
+      "mediaUrl": null,
+      "createdAt": "2026-05-01T17:52:12.000Z",
+      "updatedAt": "2026-05-01T17:52:12.000Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "recipientId": 1,
+      "actorId": 2,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 1,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 2,
+      "recipientId": 1,
+      "actorId": 3,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 1,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 3,
+      "recipientId": 1,
+      "actorId": 2,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 2,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 4,
+      "recipientId": 1,
+      "actorId": 3,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 2,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 5,
+      "recipientId": 1,
+      "actorId": 2,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 3,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 6,
+      "recipientId": 1,
+      "actorId": 3,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 3,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 7,
+      "recipientId": 1,
+      "actorId": 2,
+      "notificationType": "follow",
+      "entityType": "user",
+      "entityId": 1,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 8,
+      "recipientId": 1,
+      "actorId": 3,
+      "notificationType": "follow",
+      "entityType": "user",
+      "entityId": 1,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T16:28:40.000Z",
+      "updatedAt": "2026-04-24T16:28:40.000Z"
+    },
+    {
+      "id": 9,
+      "recipientId": 3,
+      "actorId": 4,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 29,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T19:11:40.000Z",
+      "updatedAt": "2026-04-24T19:11:40.000Z"
+    },
+    {
+      "id": 10,
+      "recipientId": 3,
+      "actorId": 4,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 29,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T19:11:46.000Z",
+      "updatedAt": "2026-04-24T19:11:46.000Z"
+    },
+    {
+      "id": 11,
+      "recipientId": 4,
+      "actorId": 8,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 33,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T19:12:22.000Z",
+      "updatedAt": "2026-04-24T19:12:22.000Z"
+    },
+    {
+      "id": 12,
+      "recipientId": 4,
+      "actorId": 8,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 33,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T19:12:27.000Z",
+      "updatedAt": "2026-04-24T19:12:27.000Z"
+    },
+    {
+      "id": 13,
+      "recipientId": 4,
+      "actorId": 8,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 33,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T19:12:34.000Z",
+      "updatedAt": "2026-04-24T19:12:34.000Z"
+    },
+    {
+      "id": 14,
+      "recipientId": 4,
+      "actorId": 8,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 33,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T19:12:36.000Z",
+      "updatedAt": "2026-04-24T19:12:36.000Z"
+    },
+    {
+      "id": 15,
+      "recipientId": 4,
+      "actorId": 8,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 33,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T19:30:00.000Z",
+      "updatedAt": "2026-04-24T19:30:00.000Z"
+    },
+    {
+      "id": 16,
+      "recipientId": 1,
+      "actorId": 4,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 19,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T19:52:27.000Z",
+      "updatedAt": "2026-04-24T19:52:27.000Z"
+    },
+    {
+      "id": 17,
+      "recipientId": 8,
+      "actorId": 4,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 34,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T19:52:31.000Z",
+      "updatedAt": "2026-04-24T19:52:31.000Z"
+    },
+    {
+      "id": 18,
+      "recipientId": 1,
+      "actorId": 8,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 18,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T20:29:28.000Z",
+      "updatedAt": "2026-04-24T20:29:28.000Z"
+    },
+    {
+      "id": 19,
+      "recipientId": 1,
+      "actorId": 8,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 18,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T20:29:32.000Z",
+      "updatedAt": "2026-04-24T20:29:32.000Z"
+    },
+    {
+      "id": 20,
+      "recipientId": 4,
+      "actorId": 8,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 17,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T20:29:51.000Z",
+      "updatedAt": "2026-04-24T20:29:51.000Z"
+    },
+    {
+      "id": 21,
+      "recipientId": 1,
+      "actorId": 9,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 19,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T20:51:37.000Z",
+      "updatedAt": "2026-04-24T20:51:37.000Z"
+    },
+    {
+      "id": 22,
+      "recipientId": 1,
+      "actorId": 9,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 19,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T20:51:42.000Z",
+      "updatedAt": "2026-04-24T20:51:42.000Z"
+    },
+    {
+      "id": 23,
+      "recipientId": 9,
+      "actorId": 8,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 35,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T20:53:26.000Z",
+      "updatedAt": "2026-04-24T20:53:26.000Z"
+    },
+    {
+      "id": 24,
+      "recipientId": 8,
+      "actorId": 9,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 34,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T20:57:40.000Z",
+      "updatedAt": "2026-04-24T20:57:40.000Z"
+    },
+    {
+      "id": 25,
+      "recipientId": 1,
+      "actorId": 9,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 20,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T21:02:38.000Z",
+      "updatedAt": "2026-04-24T21:02:38.000Z"
+    },
+    {
+      "id": 26,
+      "recipientId": 8,
+      "actorId": 9,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 34,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T21:04:39.000Z",
+      "updatedAt": "2026-04-24T21:04:39.000Z"
+    },
+    {
+      "id": 27,
+      "recipientId": 4,
+      "actorId": 10,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 17,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T21:07:05.000Z",
+      "updatedAt": "2026-04-24T21:07:05.000Z"
+    },
+    {
+      "id": 28,
+      "recipientId": 9,
+      "actorId": 10,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 35,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T21:08:26.000Z",
+      "updatedAt": "2026-04-24T21:08:26.000Z"
+    },
+    {
+      "id": 29,
+      "recipientId": 9,
+      "actorId": 10,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 35,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T21:08:31.000Z",
+      "updatedAt": "2026-04-24T21:08:31.000Z"
+    },
+    {
+      "id": 30,
+      "recipientId": 9,
+      "actorId": 10,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 35,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T21:08:35.000Z",
+      "updatedAt": "2026-04-24T21:08:35.000Z"
+    },
+    {
+      "id": 31,
+      "recipientId": 9,
+      "actorId": 10,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 35,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T21:08:37.000Z",
+      "updatedAt": "2026-04-24T21:08:37.000Z"
+    },
+    {
+      "id": 32,
+      "recipientId": 9,
+      "actorId": 10,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 35,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T21:08:59.000Z",
+      "updatedAt": "2026-04-24T21:08:59.000Z"
+    },
+    {
+      "id": 33,
+      "recipientId": 9,
+      "actorId": 8,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 35,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T21:10:22.000Z",
+      "updatedAt": "2026-04-24T21:10:22.000Z"
+    },
+    {
+      "id": 34,
+      "recipientId": 9,
+      "actorId": 8,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 35,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-24T21:10:44.000Z",
+      "updatedAt": "2026-04-24T21:10:44.000Z"
+    },
+    {
+      "id": 35,
+      "recipientId": 9,
+      "actorId": 8,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 35,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-25T10:11:19.000Z",
+      "updatedAt": "2026-04-25T10:11:19.000Z"
+    },
+    {
+      "id": 36,
+      "recipientId": 9,
+      "actorId": 8,
+      "notificationType": "new_post",
+      "entityType": "post",
+      "entityId": 36,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-25T20:36:21.000Z",
+      "updatedAt": "2026-04-25T20:36:21.000Z"
+    },
+    {
+      "id": 37,
+      "recipientId": 9,
+      "actorId": 8,
+      "notificationType": "new_post",
+      "entityType": "post",
+      "entityId": 37,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-25T20:37:06.000Z",
+      "updatedAt": "2026-04-25T20:37:06.000Z"
+    },
+    {
+      "id": 38,
+      "recipientId": 9,
+      "actorId": 8,
+      "notificationType": "new_post",
+      "entityType": "post",
+      "entityId": 38,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-25T21:18:43.000Z",
+      "updatedAt": "2026-04-25T21:18:43.000Z"
+    },
+    {
+      "id": 39,
+      "recipientId": 9,
+      "actorId": 8,
+      "notificationType": "new_post",
+      "entityType": "post",
+      "entityId": 39,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-25T22:01:30.000Z",
+      "updatedAt": "2026-04-25T22:01:30.000Z"
+    },
+    {
+      "id": 40,
+      "recipientId": 8,
+      "actorId": 10,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 38,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-27T16:22:37.000Z",
+      "updatedAt": "2026-04-27T16:22:37.000Z"
+    },
+    {
+      "id": 41,
+      "recipientId": 10,
+      "actorId": 12,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 45,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T04:40:22.000Z",
+      "updatedAt": "2026-04-28T04:40:22.000Z"
+    },
+    {
+      "id": 42,
+      "recipientId": 10,
+      "actorId": 12,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 45,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T04:40:28.000Z",
+      "updatedAt": "2026-04-28T04:40:28.000Z"
+    },
+    {
+      "id": 43,
+      "recipientId": 12,
+      "actorId": 10,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 46,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T04:40:40.000Z",
+      "updatedAt": "2026-04-28T04:40:40.000Z"
+    },
+    {
+      "id": 44,
+      "recipientId": 9,
+      "actorId": 12,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 35,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T04:43:31.000Z",
+      "updatedAt": "2026-04-28T04:43:31.000Z"
+    },
+    {
+      "id": 45,
+      "recipientId": 9,
+      "actorId": 12,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 35,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T04:43:38.000Z",
+      "updatedAt": "2026-04-28T04:43:38.000Z"
+    },
+    {
+      "id": 46,
+      "recipientId": 12,
+      "actorId": 10,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 46,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T07:40:46.000Z",
+      "updatedAt": "2026-04-28T07:40:46.000Z"
+    },
+    {
+      "id": 47,
+      "recipientId": 3,
+      "actorId": 13,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 29,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T07:48:17.000Z",
+      "updatedAt": "2026-04-28T07:48:17.000Z"
+    },
+    {
+      "id": 48,
+      "recipientId": 13,
+      "actorId": 10,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 47,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T07:54:30.000Z",
+      "updatedAt": "2026-04-28T07:54:30.000Z"
+    },
+    {
+      "id": 49,
+      "recipientId": 10,
+      "actorId": 14,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 45,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T08:10:24.000Z",
+      "updatedAt": "2026-04-28T08:10:24.000Z"
+    },
+    {
+      "id": 50,
+      "recipientId": 10,
+      "actorId": 12,
+      "notificationType": "new_post",
+      "entityType": "post",
+      "entityId": 48,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T09:31:23.000Z",
+      "updatedAt": "2026-04-28T09:31:23.000Z"
+    },
+    {
+      "id": 51,
+      "recipientId": 10,
+      "actorId": 12,
+      "notificationType": "new_post",
+      "entityType": "post",
+      "entityId": 49,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T09:31:26.000Z",
+      "updatedAt": "2026-04-28T09:31:26.000Z"
+    },
+    {
+      "id": 52,
+      "recipientId": 12,
+      "actorId": 10,
+      "notificationType": "like",
+      "entityType": "post",
+      "entityId": 49,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T09:45:11.000Z",
+      "updatedAt": "2026-04-28T09:45:11.000Z"
+    },
+    {
+      "id": 53,
+      "recipientId": 12,
+      "actorId": 10,
+      "notificationType": "new_post",
+      "entityType": "post",
+      "entityId": 50,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-04-28T10:11:14.000Z",
+      "updatedAt": "2026-04-28T10:11:14.000Z"
+    },
+    {
+      "id": 54,
+      "recipientId": 10,
+      "actorId": 8,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 50,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-05-01T17:28:34.000Z",
+      "updatedAt": "2026-05-01T17:28:34.000Z"
+    },
+    {
+      "id": 55,
+      "recipientId": 10,
+      "actorId": 8,
+      "notificationType": "comment",
+      "entityType": "post",
+      "entityId": 50,
+      "payloadJson": null,
+      "readAt": null,
+      "createdAt": "2026-05-01T18:52:58.000Z",
+      "updatedAt": "2026-05-01T18:52:58.000Z"
+    }
+  ],
+  "userNotificationPrefs": [],
+  "leaderboardWeeks": [
+    {
+      "id": 1,
+      "weekStart": "2026-04-20",
+      "weekEnd": "2026-04-26",
+      "status": "active",
+      "createdAt": "2026-04-24T16:34:05.000Z",
+      "updatedAt": "2026-04-24T16:34:05.000Z"
+    },
+    {
+      "id": 2,
+      "weekStart": "2026-04-19",
+      "weekEnd": "2026-04-25",
+      "status": "active",
+      "createdAt": "2026-04-24T18:41:31.000Z",
+      "updatedAt": "2026-04-24T18:41:31.000Z"
+    },
+    {
+      "id": 3,
+      "weekStart": "2026-04-27",
+      "weekEnd": "2026-05-03",
+      "status": "active",
+      "createdAt": "2026-04-27T16:22:59.000Z",
+      "updatedAt": "2026-04-27T16:22:59.000Z"
+    }
+  ],
+  "weeklyScores": [
+    {
+      "id": 1,
+      "weekId": 1,
+      "userId": 4,
+      "points": 30,
+      "rankSnapshot": 1,
+      "createdAt": "2026-04-24T16:34:09.000Z",
+      "updatedAt": "2026-04-24T18:26:35.000Z"
+    },
+    {
+      "id": 2,
+      "weekId": 2,
+      "userId": 8,
+      "points": 50,
+      "rankSnapshot": 1,
+      "createdAt": "2026-04-24T19:15:52.000Z",
+      "updatedAt": "2026-04-25T22:01:30.000Z"
+    },
+    {
+      "id": 3,
+      "weekId": 2,
+      "userId": 9,
+      "points": 10,
+      "rankSnapshot": 2,
+      "createdAt": "2026-04-24T20:52:30.000Z",
+      "updatedAt": "2026-04-24T20:59:32.000Z"
+    },
+    {
+      "id": 4,
+      "weekId": 3,
+      "userId": 10,
+      "points": 70,
+      "rankSnapshot": 1,
+      "createdAt": "2026-04-27T16:24:51.000Z",
+      "updatedAt": "2026-04-28T10:11:13.000Z"
+    },
+    {
+      "id": 5,
+      "weekId": 3,
+      "userId": 12,
+      "points": 30,
+      "rankSnapshot": 2,
+      "createdAt": "2026-04-28T04:40:00.000Z",
+      "updatedAt": "2026-04-28T09:31:26.000Z"
+    },
+    {
+      "id": 6,
+      "weekId": 3,
+      "userId": 13,
+      "points": 10,
+      "rankSnapshot": 3,
+      "createdAt": "2026-04-28T07:47:48.000Z",
+      "updatedAt": "2026-04-28T07:48:19.000Z"
+    }
+  ],
+  "scoreEvents": [
+    {
+      "id": 1,
+      "userId": 4,
+      "weekId": 1,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 16,
+      "createdAt": "2026-04-24T16:34:09.000Z",
+      "updatedAt": "2026-04-24T16:34:09.000Z"
+    },
+    {
+      "id": 2,
+      "userId": 4,
+      "weekId": 1,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 17,
+      "createdAt": "2026-04-24T18:17:08.000Z",
+      "updatedAt": "2026-04-24T18:17:08.000Z"
+    },
+    {
+      "id": 3,
+      "userId": 4,
+      "weekId": 1,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 33,
+      "createdAt": "2026-04-24T18:26:35.000Z",
+      "updatedAt": "2026-04-24T18:26:35.000Z"
+    },
+    {
+      "id": 4,
+      "userId": 8,
+      "weekId": 2,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 34,
+      "createdAt": "2026-04-24T19:15:52.000Z",
+      "updatedAt": "2026-04-24T19:15:52.000Z"
+    },
+    {
+      "id": 5,
+      "userId": 9,
+      "weekId": 2,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 35,
+      "createdAt": "2026-04-24T20:52:30.000Z",
+      "updatedAt": "2026-04-24T20:52:30.000Z"
+    },
+    {
+      "id": 6,
+      "userId": 8,
+      "weekId": 2,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 36,
+      "createdAt": "2026-04-25T20:36:21.000Z",
+      "updatedAt": "2026-04-25T20:36:21.000Z"
+    },
+    {
+      "id": 7,
+      "userId": 8,
+      "weekId": 2,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 37,
+      "createdAt": "2026-04-25T20:37:06.000Z",
+      "updatedAt": "2026-04-25T20:37:06.000Z"
+    },
+    {
+      "id": 8,
+      "userId": 8,
+      "weekId": 2,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 38,
+      "createdAt": "2026-04-25T21:18:43.000Z",
+      "updatedAt": "2026-04-25T21:18:43.000Z"
+    },
+    {
+      "id": 9,
+      "userId": 8,
+      "weekId": 2,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 39,
+      "createdAt": "2026-04-25T22:01:30.000Z",
+      "updatedAt": "2026-04-25T22:01:30.000Z"
+    },
+    {
+      "id": 10,
+      "userId": 10,
+      "weekId": 3,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 40,
+      "createdAt": "2026-04-27T16:24:51.000Z",
+      "updatedAt": "2026-04-27T16:24:51.000Z"
+    },
+    {
+      "id": 11,
+      "userId": 10,
+      "weekId": 3,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 41,
+      "createdAt": "2026-04-27T16:24:51.000Z",
+      "updatedAt": "2026-04-27T16:24:51.000Z"
+    },
+    {
+      "id": 12,
+      "userId": 10,
+      "weekId": 3,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 42,
+      "createdAt": "2026-04-27T16:24:52.000Z",
+      "updatedAt": "2026-04-27T16:24:52.000Z"
+    },
+    {
+      "id": 13,
+      "userId": 10,
+      "weekId": 3,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 43,
+      "createdAt": "2026-04-27T16:24:53.000Z",
+      "updatedAt": "2026-04-27T16:24:53.000Z"
+    },
+    {
+      "id": 14,
+      "userId": 10,
+      "weekId": 3,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 44,
+      "createdAt": "2026-04-27T16:24:53.000Z",
+      "updatedAt": "2026-04-27T16:24:53.000Z"
+    },
+    {
+      "id": 15,
+      "userId": 10,
+      "weekId": 3,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 45,
+      "createdAt": "2026-04-28T04:24:59.000Z",
+      "updatedAt": "2026-04-28T04:24:59.000Z"
+    },
+    {
+      "id": 16,
+      "userId": 12,
+      "weekId": 3,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 46,
+      "createdAt": "2026-04-28T04:40:00.000Z",
+      "updatedAt": "2026-04-28T04:40:00.000Z"
+    },
+    {
+      "id": 17,
+      "userId": 13,
+      "weekId": 3,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 47,
+      "createdAt": "2026-04-28T07:47:48.000Z",
+      "updatedAt": "2026-04-28T07:47:48.000Z"
+    },
+    {
+      "id": 18,
+      "userId": 12,
+      "weekId": 3,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 48,
+      "createdAt": "2026-04-28T09:31:23.000Z",
+      "updatedAt": "2026-04-28T09:31:23.000Z"
+    },
+    {
+      "id": 19,
+      "userId": 12,
+      "weekId": 3,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 49,
+      "createdAt": "2026-04-28T09:31:26.000Z",
+      "updatedAt": "2026-04-28T09:31:26.000Z"
+    },
+    {
+      "id": 20,
+      "userId": 10,
+      "weekId": 3,
+      "source": "submission_reward",
+      "pointsDelta": 10,
+      "refType": "post",
+      "refId": 50,
+      "createdAt": "2026-04-28T10:11:14.000Z",
+      "updatedAt": "2026-04-28T10:11:14.000Z"
+    }
+  ],
+  "badges": [],
+  "userBadges": [],
+  "moderationCases": [],
+  "userStrikes": [],
+  "appeals": [],
+  "userEnforcements": []
 }
