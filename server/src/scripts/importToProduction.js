@@ -12,7 +12,8 @@ async function importData() {
     }
 
     const data = JSON.parse(fs.readFileSync(dataPath, "utf8"));
-    const storage = getFirebaseStorage().storage;
+    const { getFirebaseApp } = require("../config/firebase");
+    const storage = getFirebaseApp().storage();
     const bucket = storage.bucket("chesh-a1ff5.appspot.com");
 
     console.log("Starting migration to production...");

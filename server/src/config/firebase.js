@@ -36,6 +36,7 @@ function getFirebaseApp() {
 }
 
 module.exports = {
+  getFirebaseApp,
   getFirebaseAuth() {
     return getFirebaseApp().auth();
   },
