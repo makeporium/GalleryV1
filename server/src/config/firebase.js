@@ -29,7 +29,7 @@ function getFirebaseApp() {
   app = admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     projectId: env.firebaseProjectId,
-    storageBucket: `${env.firebaseProjectId}.firebasestorage.app`,
+    storageBucket: `${env.firebaseProjectId}.appspot.com`,
   });
 
   return app;
