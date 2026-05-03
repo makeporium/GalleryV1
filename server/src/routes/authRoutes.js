@@ -37,6 +37,7 @@ async function handleFirebaseTokenExchange(req, res) {
     if (error.name === "ZodError") {
       return res.status(400).json({ message: "Invalid request body." });
     }
+    console.error("Firebase Auth Error:", error);
     return res.status(401).json({ message: "Failed to authenticate Firebase user." });
   }
 }
