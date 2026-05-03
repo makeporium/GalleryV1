@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "npm start",
-    "start": "node src/scripts/ensureUploads.js && node src/scripts/initDb.js && node src/scripts/importToProduction.js && node src/index.js",
+    "start": "node src/index.js",
     "db:reset": "node src/scripts/resetDb.js",
     "db:init": "node src/scripts/initDb.js",
     "db:seed:phase2": "node src/scripts/seedPhase2.js",
