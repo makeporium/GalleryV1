@@ -199,9 +199,9 @@ router.post("/posts", requireAuth, async (req, res, next) => {
           // Save file
           fs.writeFileSync(filepath, buffer);
           
-          // Get the host from the request to build the URL
-          const protocol = req.protocol;
+          // Force https in production (Railway) to avoid Cleartext issues on Android
           const host = req.get('host');
+          const protocol = host.includes('railway.app') ? 'https' : req.protocol;
           mediaUrl = `${protocol}://${host}/uploads/${filename}`;
           console.log('Saved uploaded image:', mediaUrl);
         }

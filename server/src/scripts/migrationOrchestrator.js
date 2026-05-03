@@ -3,7 +3,7 @@ const path = require("path");
 const { execSync } = require("child_process");
 
 async function orchestrateMigration() {
-  const sentinelPath = "/app/uploads/.migration_done_v2";
+  const sentinelPath = "/app/uploads/.migration_done_v3";
   
   // Only run if the sentinel file is missing
   if (fs.existsSync(sentinelPath)) {
@@ -23,7 +23,11 @@ async function orchestrateMigration() {
     console.log("Step 2: Importing database records...");
     execSync("node " + path.join(__dirname, "importToProduction.js"), { stdio: "inherit" });
 
-    // 3. Create sentinel file on the PERSISTENT volume
+    // 3. Fix any HTTP URLs to HTTPS for Android security
+    console.log("Step 3: Fixing HTTP -> HTTPS URLs...");
+    execSync("node " + path.join(__dirname, "fixHttps.js"), { stdio: "inherit" });
+
+    // 4. Create sentinel file on the PERSISTENT volume
     fs.writeFileSync(sentinelPath, "done at " + new Date().toISOString());
     console.log("Migration orchestration finished successfully.");
   } catch (error) {
