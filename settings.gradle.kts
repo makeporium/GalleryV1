@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "chesh"
+rootProject.name = "SnapShot"
 include(":app")
  

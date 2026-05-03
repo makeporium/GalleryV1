@@ -23,7 +23,7 @@
 **File**: `app/src/main/res/values/strings.xml`
 ```xml
 <resources>
-    <string name="app_name">chesh</string>
+    <string name="app_name">SnapShot</string>
     <string name="backend_base_url">http://10.7.24.61:8080/</string>
     <string name="google_web_client_id">750649718921-5utcek3vkl10inrnubgupshoeu1tjuh9.apps.googleusercontent.com</string>
 </resources>
@@ -42,12 +42,12 @@
 
 ## Step 24: `ApiService.java` — Defining All API Calls <a name="step-24"></a>
 
-**File**: `app/src/main/java/com/example/chesh/network/ApiService.java`
+**File**: `app/src/main/java/com/example/SnapShot/network/ApiService.java`
 
 This is a **Java interface** — it's like a contract that defines what methods exist but doesn't implement them. Retrofit generates the implementation at runtime.
 
 ```java
-package com.example.chesh.network;
+package com.example.snapshot.network;
 
 import retrofit2.Call;          // Represents an HTTP call that can be executed
 import retrofit2.http.*;        // Annotations: @GET, @POST, @DELETE, etc.
@@ -175,7 +175,7 @@ public interface ApiService {
 ## Step 25: `ApiClient.java` — Creating the Retrofit Instance <a name="step-25"></a>
 
 ```java
-package com.example.chesh.network;
+package com.example.snapshot.network;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -296,7 +296,7 @@ public class FeedResponse {
 
 ```java
 public class SessionStore {
-    private static final String PREF_NAME = "chesh_session";  // SharedPreferences file name
+    private static final String PREF_NAME = "SnapShot_session";  // SharedPreferences file name
     private static final String KEY_TOKEN = "access_token";
     // ... other keys for user fields
 
@@ -584,3 +584,4 @@ Here's what happens when the home screen loads the feed:
 ---
 
 > **This completes the full explanation.** With these 4 parts, you have everything needed to understand and replicate the backend integration from scratch.
+

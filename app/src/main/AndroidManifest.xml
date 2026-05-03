@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Chesh">
+        android:theme="@style/Theme.SnapShot">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -27,8 +27,8 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="chesh.app" android:pathPrefix="/profile/" />
-                <data android:scheme="http" android:host="chesh.app" android:pathPrefix="/profile/" />
+                <data android:scheme="https" android:host="snapshot.app" android:pathPrefix="/profile/" />
+                <data android:scheme="http" android:host="snapshot.app" android:pathPrefix="/profile/" />
             </intent-filter>
         </activity>
     </application>

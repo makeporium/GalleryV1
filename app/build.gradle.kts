@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.chesh"
+    namespace = "com.example.snapshot"
     compileSdk {
         version = release(36)
     }
