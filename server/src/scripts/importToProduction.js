@@ -47,20 +47,54 @@ async function importData() {
     console.log("Migrating users...");
     for (const u of data.users) {
       const avatarUrl = await uploadToFirebase(u.avatarUrl);
-      await User.upsert({ ...u, avatarUrl });
+      console.log(`Upserting user: ${u.email}`);
+      await User.upsert({
+        id: u.id,
+        firebaseUid: u.firebaseUid,
+        email: u.email,
+        name: u.name,
+        avatarUrl: avatarUrl,
+        bio: u.bio,
+        pronouns: u.pronouns,
+        provider: u.provider,
+        createdAt: u.createdAt,
+        updatedAt: u.updatedAt
+      });
     }
 
     // 2. Posts
     console.log("Migrating posts...");
     for (const p of data.posts) {
-      await Post.upsert(p);
+      console.log(`Upserting post: ${p.id}`);
+      await Post.upsert({
+        id: p.id,
+        userId: p.userId,
+        promptId: p.promptId,
+        caption: p.caption,
+        status: p.status,
+        submittedAt: p.submittedAt,
+        createdAt: p.createdAt,
+        updatedAt: p.updatedAt
+      });
     }
 
     // 3. Post Media
     console.log("Migrating media...");
     for (const m of data.postMedia) {
       const mediaUrl = await uploadToFirebase(m.mediaUrl);
-      await PostMedia.upsert({ ...m, mediaUrl });
+      console.log(`Upserting media for post ${m.postId}: ${mediaUrl}`);
+      await PostMedia.upsert({
+        id: m.id,
+        postId: m.postId,
+        mediaUrl: mediaUrl,
+        storageKey: m.storageKey,
+        mimeType: m.mimeType,
+        width: m.width,
+        height: m.height,
+        phash: m.phash,
+        createdAt: m.createdAt,
+        updatedAt: m.updatedAt
+      });
     }
 
     // 4. Likes, Comments, Follows
