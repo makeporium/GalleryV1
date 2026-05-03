@@ -13,6 +13,9 @@ function getFirebaseApp() {
   let serviceAccount;
   if (env.firebaseServiceAccountJson) {
     serviceAccount = JSON.parse(env.firebaseServiceAccountJson);
+    if (serviceAccount.private_key) {
+      serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+    }
   } else if (env.firebaseServiceAccountPath) {
     const servicePath = path.resolve(process.cwd(), env.firebaseServiceAccountPath);
     if (!fs.existsSync(servicePath)) {
