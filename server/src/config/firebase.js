@@ -29,6 +29,7 @@ function getFirebaseApp() {
   app = admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     projectId: env.firebaseProjectId,
+    storageBucket: `${env.firebaseProjectId}.firebasestorage.app`,
   });
 
   return app;
@@ -39,6 +40,6 @@ module.exports = {
     return getFirebaseApp().auth();
   },
   getFirebaseStorage() {
-    return getFirebaseApp().storage().bucket(`${env.firebaseProjectId}.firebasestorage.app`);
+    return getFirebaseApp().storage().bucket();
   },
 };
