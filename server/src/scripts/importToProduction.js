@@ -12,7 +12,8 @@ async function importData() {
     }
 
     const data = JSON.parse(fs.readFileSync(dataPath, "utf8"));
-    const bucket = getFirebaseStorage().storage.bucket("chesh-a1ff5.appspot.com");
+    const storage = getFirebaseStorage().storage;
+    const bucket = storage.bucket("chesh-a1ff5.appspot.com");
 
     console.log("Starting migration to production...");
     await sequelize.authenticate();
@@ -31,16 +32,20 @@ async function importData() {
 
       console.log(`Uploading ${fileName} to Firebase...`);
       const destination = `uploads/${fileName}`;
-      await bucket.upload(filePath, {
-        destination,
-        public: true,
-        metadata: {
-          contentType: fileName.endsWith(".jpeg") || fileName.endsWith(".jpg") ? "image/jpeg" : "image/png",
-        },
-      });
-
-      // Construct public URL
-      return `https://storage.googleapis.com/${bucket.name}/${destination}`;
+      try {
+        await bucket.upload(filePath, {
+          destination,
+          public: true,
+          metadata: {
+            contentType: fileName.endsWith(".jpeg") || fileName.endsWith(".jpg") ? "image/jpeg" : "image/png",
+          },
+        });
+        // Construct public URL
+        return `https://storage.googleapis.com/${bucket.name}/${destination}`;
+      } catch (uploadError) {
+        console.error(`Upload failed for ${fileName}:`, uploadError.message);
+        return localPath; // Fallback to local path if upload fails
+      }
     };
 
     // 1. Users
