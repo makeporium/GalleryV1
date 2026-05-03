@@ -19,7 +19,7 @@ async function importData() {
 
     // Helper to upload to Firebase and get public URL
     const uploadToFirebase = async (localPath) => {
-      if (!localPath || !localPath.includes("uploads/")) return localPath;
+      if (!localPath || (!localPath.includes("uploads/") && !localPath.includes("uploads\\"))) return localPath;
       
       const fileName = path.basename(localPath);
       const filePath = path.join(__dirname, "../../uploads", fileName);
@@ -46,7 +46,7 @@ async function importData() {
     // 1. Users
     console.log("Migrating users...");
     for (const u of data.users) {
-      const avatarUrl = await uploadToFirebase(u.avatar_url);
+      const avatarUrl = await uploadToFirebase(u.avatarUrl);
       await User.upsert({ ...u, avatarUrl });
     }
 
@@ -59,7 +59,7 @@ async function importData() {
     // 3. Post Media
     console.log("Migrating media...");
     for (const m of data.postMedia) {
-      const mediaUrl = await uploadToFirebase(m.media_url);
+      const mediaUrl = await uploadToFirebase(m.mediaUrl);
       await PostMedia.upsert({ ...m, mediaUrl });
     }
 
