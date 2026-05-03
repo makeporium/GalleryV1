@@ -1,5 +1,4 @@
 const { sequelize, User, Post, PostMedia, PostLike, PostComment, Follow } = require("../models");
-const { getFirebaseStorage } = require("../config/firebase");
 const fs = require("fs");
 const path = require("path");
 
@@ -12,47 +11,24 @@ async function importData() {
     }
 
     const data = JSON.parse(fs.readFileSync(dataPath, "utf8"));
-    const { getFirebaseApp } = require("../config/firebase");
-    const storage = getFirebaseApp().storage();
-    const bucket = storage.bucket("chesh-a1ff5.appspot.com");
+    const productionUrl = "https://galleryv1-production.up.railway.app";
 
-    console.log("Starting migration to production...");
+    console.log("Starting migration to production (Railway Storage)...");
     await sequelize.authenticate();
 
-    // Helper to upload to Firebase and get public URL
-    const uploadToFirebase = async (localPath) => {
+    // Helper to fix local paths to Railway paths
+    const fixUrl = (localPath) => {
       if (!localPath || (!localPath.includes("uploads/") && !localPath.includes("uploads\\"))) return localPath;
       
       const fileName = path.basename(localPath);
-      const filePath = path.join(__dirname, "../../uploads", fileName);
-      
-      if (!fs.existsSync(filePath)) {
-        console.warn(`File not found: ${filePath}`);
-        return localPath;
-      }
-
-      console.log(`Uploading ${fileName} to Firebase...`);
-      const destination = `uploads/${fileName}`;
-      try {
-        await bucket.upload(filePath, {
-          destination,
-          public: true,
-          metadata: {
-            contentType: fileName.endsWith(".jpeg") || fileName.endsWith(".jpg") ? "image/jpeg" : "image/png",
-          },
-        });
-        // Construct public URL
-        return `https://storage.googleapis.com/${bucket.name}/${destination}`;
-      } catch (uploadError) {
-        console.error(`Upload failed for ${fileName}:`, uploadError.message);
-        return localPath; // Fallback to local path if upload fails
-      }
+      // In production, we serve from /uploads route
+      return `${productionUrl}/uploads/${fileName}`;
     };
 
     // 1. Users
     console.log("Migrating users...");
     for (const u of data.users) {
-      const avatarUrl = await uploadToFirebase(u.avatarUrl);
+      const avatarUrl = fixUrl(u.avatarUrl);
       console.log(`Upserting user: ${u.email}`);
       await User.upsert({
         id: u.id,
@@ -87,7 +63,7 @@ async function importData() {
     // 3. Post Media
     console.log("Migrating media...");
     for (const m of data.postMedia) {
-      const mediaUrl = await uploadToFirebase(m.mediaUrl);
+      const mediaUrl = fixUrl(m.mediaUrl);
       console.log(`Upserting media for post ${m.postId}: ${mediaUrl}`);
       await PostMedia.upsert({
         id: m.id,
@@ -109,7 +85,7 @@ async function importData() {
     for (const c of data.postComments) await PostComment.upsert(c);
     for (const f of data.follows) await Follow.upsert(f);
 
-    console.log("Migration completed successfully!");
+    console.log("Migration completed successfully using Railway storage!");
     process.exit(0);
   } catch (error) {
     console.error("Migration failed:", error);
