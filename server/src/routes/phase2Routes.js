@@ -869,23 +869,25 @@ router.get("/conversations", requireAuth, async (req, res, next) => {
 router.post("/conversations/direct", requireAuth, async (req, res, next) => {
   try {
     const { targetUserId } = directConversationSchema.parse(req.body);
+    console.log(`Checking/Creating direct conversation: ${req.user.id} -> ${targetUserId}`);
     if (targetUserId === req.user.id) {
       return res.status(400).json({ message: "Cannot create conversation with yourself." });
     }
 
-    // Check if a direct conversation already exists between these two users
-    const [existing] = await sequelize.query(
-      `SELECT c.id AS conversationId
-       FROM conversations c
-       JOIN conversation_participants cp1 ON c.id = cp1.conversation_id AND cp1.user_id = ?
-       JOIN conversation_participants cp2 ON c.id = cp2.conversation_id AND cp2.user_id = ?
-       WHERE c.conversation_type = 'direct'
+    const [[existing]] = await sequelize.query(
+      `SELECT cp1.conversation_id AS conversationId
+       FROM conversation_participants cp1
+       INNER JOIN conversation_participants cp2 ON cp1.conversation_id = cp2.conversation_id
+       INNER JOIN conversations c ON cp1.conversation_id = c.id
+       WHERE cp1.user_id = ? 
+         AND cp2.user_id = ? 
+         AND c.conversation_type = 'direct'
        LIMIT 1`,
       { replacements: [req.user.id, targetUserId] }
     );
 
-    if (existing.length > 0) {
-      return res.status(200).json({ conversationId: existing[0].conversationId });
+    if (existing) {
+      return res.status(200).json({ conversationId: existing.conversationId });
     }
 
     // 13. Transaction: create conversation and both participants atomically
